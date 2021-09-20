@@ -1,6 +1,6 @@
 const config = {
     api: {
-        url: "http://sfestagingapi-env.eba-ntw7t9ig.us-east-1.elasticbeanstalk.com"
+        url: "https://staging-api.shoesforeducation.org"
     }
 }
 
