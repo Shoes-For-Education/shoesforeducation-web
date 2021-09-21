@@ -40,7 +40,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                     <li className={classes.li}>
                         <Typography
                             className={classes.liContent}
-                        >Request Book</Typography>
+                        >Request Shoes</Typography>
                         <FontAwesomeIcon 
                             className={classes.arrow}
                             icon={faChevronRight} 
