@@ -29,7 +29,9 @@ const BrandButton : React.FC<BrandButtonProps> = ({
                     classes.button,
                     className ? className : null,                
                 )}>
-                <Typography style={{ fontSize: 14 }}>{ title }</Typography>
+                <Typography style={{
+                    fontSize: 14, color: "#fff" 
+                }}>{ title }</Typography>
             </Button>
         </div>
     )

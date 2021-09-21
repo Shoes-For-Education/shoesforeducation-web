@@ -5,7 +5,11 @@ export const useStyles = makeStyles((theme) => ({
     container: {
         display: 'flex',
         alignItems: 'center',
-        height: '100vh',
+        minHeight: '100vh',
+        "@media(max-width: 950px)": {
+            paddingTop: 75,
+            flexDirection: "column-reverse",
+        },
     },
     shoeCircle: {
         minWidth: 200,
@@ -47,6 +51,9 @@ export const useStyles = makeStyles((theme) => ({
         fontSize: "clamp(50px, 4.25vw, 4.25vw)",
         color: "#181818",
         maxWidth: "30vw",
+        "@media(max-width: 950px)": {
+            maxWidth: "85vw",
+        },
     },
     shoesBold: {
         fontWeight: 'bold',
@@ -64,5 +71,8 @@ export const useStyles = makeStyles((theme) => ({
         marginBottom: 30,
         fontSize: 14,
         maxWidth: "30vw",
+        "@media(max-width: 950px)": {
+            maxWidth: "85vw",
+        },
     }
 }));
