@@ -5,7 +5,6 @@ export const useStyles = makeStyles((theme) => ({
     container: {
         display: 'flex',
         alignItems: 'center',
-        minHeight: '100vh',
         "@media(max-width: 950px)": {
             paddingTop: 75,
             flexDirection: "column-reverse",

@@ -11,7 +11,9 @@ const HomePage = () => {
 
     return (
         <Navbar>
-            <section className={classes.container}>
+            <section 
+                className={classes.container}
+                style={{ minHeight: window.innerHeight }}>
                 <div className={clsx(classes.subContainer)}>
                     <div>
                         {/* <Typography className={classes.read}>Read Books For</Typography> */}

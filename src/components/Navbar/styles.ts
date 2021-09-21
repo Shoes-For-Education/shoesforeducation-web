@@ -83,6 +83,7 @@ export const useStyles = makeStyles(theme => ({
     liContent: {
         fontSize: 14,
         color: "grey",
+        paddingLeft: 5,
         "&:hover": {
             cursor: "pointer",
         }
@@ -99,6 +100,7 @@ export const useStyles = makeStyles(theme => ({
     arrow: {
         display: 'none',
         color: "grey",
+        marginRight: 5,
         "@media(max-width: 950px)": {
            display: 'block',
         },
