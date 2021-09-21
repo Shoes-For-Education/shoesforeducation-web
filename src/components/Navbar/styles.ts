@@ -19,20 +19,42 @@ export const useStyles = makeStyles(theme => ({
         // boxShadow: "0px 0px 5px 2px rgba(0, 0, 0, 0.15)",
         position: 'absolute',
         display: 'flex',
+        paddingLeft: 25,
+        paddingRight: 25,
+    },
+    navIcon: {
+        display: "none",
+        "@media(max-width: 950px)": {
+            display: "block",
+        },
     },
     ul: {
         display: 'flex',
         marginLeft: 'auto',
-        paddingRight: 25,
-        alignItems: 'center'
+        alignItems: 'center',
+        "@media(max-width: 950px)": {
+            position: 'fixed',
+            left: 0,
+            flexDirection: "column",
+            height: '100vh',
+            backgroundColor: "#fff",
+            width: 200,
+            top: 0,
+            padding: 0,
+            alignItems: "center",
+            boxShadow: "0px 0px 5px 2px rgba(0, 0, 0, 0.15)",
+        },
     },
     li: {
         listStyle: 'none',
-        paddingRight: 15,
-        paddingLeft: 15,
+        paddingRight: 0,
+        paddingLeft: 30,
         "&:hover": {
             cursor: "pointer",
-        }
+        },
+        "@media(max-width: 950px)": {
+            paddingLeft: 0,
+        },
     },
     liContent: {
         transition: "100ms ease",
