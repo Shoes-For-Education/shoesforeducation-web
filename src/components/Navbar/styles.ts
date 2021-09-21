@@ -20,19 +20,28 @@ export const useStyles = makeStyles(theme => ({
         // boxShadow: "0px 0px 5px 2px rgba(0, 0, 0, 0.15)",
         position: 'absolute',
         display: 'flex',
-        paddingLeft: 25,
+        paddingLeft: 5,
         paddingRight: 25,
         "@media(max-width: 950px)": {
             marginTop: 0,
             paddingTop: 0,
+            paddingRight: 0,
         },
     },
     navIcon: {
         display: "none",
         zIndex: 1,
+        marginLeft: 10,
         "@media(max-width: 950px)": {
             display: "block",
+            marginLeft: "auto",
         },
+    },
+    logo: {
+        width: 35,
+        height: 35,
+        zIndex: 1,
+        marginTop: 5
     },
     ul: {
         transition: "150ms ease",
@@ -47,7 +56,7 @@ export const useStyles = makeStyles(theme => ({
             height: '100vh',
             backgroundColor: "#fff",
             width: 200,
-            top: 0,
+            top: -15,
             padding: 15,
             paddingTop: 75,
             alignItems: "flex-start",

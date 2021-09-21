@@ -6,6 +6,7 @@ import { useStyles } from './styles'
 import MenuIcon from "@mui/icons-material/Menu";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import Logo from "../../assets/icon.png";
 
 type NavbarProps = {
     children: ReactChild;
@@ -19,6 +20,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
     return (
         <div className={classes.container}>
             <nav className={classes.nav}>
+                <img className={classes.logo} src={Logo} alt="logo" />
                 <div className={classes.navIcon}>
                     <IconButton
                         onClick={() => setShowNav(!showNav)}
@@ -32,7 +34,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                     </IconButton>
                 </div>
                 <ul 
-                    style={{ transform: showNav ? "translateX(0px)"  : "translateX(-230px)"}}
+                    style={{ transform: showNav || window.innerWidth >= 950 ? "translateX(0px)"  : "translateX(-230px)"}}
                     className={classes.ul}
                 >
                     <li className={classes.li}>
