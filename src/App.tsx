@@ -1,7 +1,8 @@
-import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { createTheme, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import { useUsers } from './hooks/useUsers';
 import Routes from './routes/Router';
+import "./index.css";
 
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
 
   console.log(users);
 
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       type: 'light',
       primary: {

@@ -5,9 +5,19 @@ import { useStyles } from './styles';
 import clsx from 'clsx';
 import { Typography } from '@material-ui/core';
 import BrandButton from '../../components/BrandButton';
+import { useHistory } from 'react-router';
 
 const HomePage = () => {
     const classes = useStyles();
+    const history = useHistory();
+
+    const handleSignUp = () => {
+        history.push("/signup");
+    }
+
+    const handleDonate= () => {
+        return; 
+    }
 
     return (
         <Navbar>
@@ -26,8 +36,8 @@ const HomePage = () => {
                             Donate today to help us continue providing our service.
                         </Typography>
                         <div className={classes.buttonGroup}>
-                           <BrandButton title="Sign Up"/> 
-                           <BrandButton mode="secondary" title="Donate Today"/> 
+                           <BrandButton onClick={handleSignUp} title="Sign Up"/> 
+                           <BrandButton onClick={handleDonate} mode="secondary" title="Donate Today"/> 
                         </div>
                     </div>
                 </div>

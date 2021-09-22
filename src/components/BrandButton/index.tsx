@@ -9,11 +9,13 @@ type BrandButtonProps = {
     mode?: "brand" | "secondary";
     color?: string; 
     className?: any,
+    onClick: () => void; 
 }
 
 const BrandButton : React.FC<BrandButtonProps> = ({
     mode = "brand",
     className,
+    onClick,
     title,
 }) => {
 
@@ -22,6 +24,7 @@ const BrandButton : React.FC<BrandButtonProps> = ({
     return (
         <div className={classes.container}>
             <Button 
+                onClick={onClick}
                 variant={"contained"}
                 color={mode === "brand" ? "primary" : "secondary"}
                 className={

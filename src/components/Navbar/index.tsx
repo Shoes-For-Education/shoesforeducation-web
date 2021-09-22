@@ -7,6 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Logo from "../../assets/icon.png";
+import { useHistory } from 'react-router';
 
 type NavbarProps = {
     children: ReactChild;
@@ -14,13 +15,26 @@ type NavbarProps = {
 
 const Navbar : React.FC<NavbarProps> = ({ children }) => {
     const classes = useStyles();
+    const history = useHistory();
 
     const [ showNav, setShowNav ] = useState(false);
+
+    const handleLogin = () => {
+        history.push("/login");
+    }
+
+    const handleSignUp = () => {
+        history.push("/signup");
+    }
+
+    const handleHome = () => {
+        history.push("/")
+    }
 
     return (
         <div className={classes.container}>
             <nav className={classes.nav}>
-                <img className={classes.logo} src={Logo} alt="logo" />
+                <img onClick={handleHome} className={classes.logo} src={Logo} alt="logo" />
                 <div className={classes.navIcon}>
                     <IconButton
                         onClick={() => setShowNav(!showNav)}
@@ -64,7 +78,9 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                             icon={faChevronRight} 
                         />
                     </li>
-                    <li className={classes.li}>
+                    <li 
+                        onClick={handleLogin}
+                        className={classes.li}>
                         <Typography
                             className={classes.liContent}
                         >Login</Typography>
@@ -74,7 +90,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                         />
                     </li>
                     <li className={classes.li}>
-                        <BrandButton className={classes.signUp} title="Sign Up" />
+                        <BrandButton onClick={handleSignUp} className={classes.signUp} title="Sign Up" />
                     </li>
                 </ul>
             </nav>

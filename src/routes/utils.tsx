@@ -2,6 +2,13 @@ import { Redirect, Route } from 'react-router';
 // import { isUserLoggedIn } from '../utils/user';
 import React from 'react';
 
+export interface IRoute {
+  path: string,
+  exact: boolean,
+  component: any,
+  isPrivate: boolean,
+}
+
 export const PrivateRoute = ({ component: Component, roles, ...rest } : any) => {
   return (
     <Route
@@ -35,5 +42,8 @@ export const flattenRoutes = (routes: any) => {
       flatRoutes = [...flatRoutes, ...flattenRoutes(item.children)];
     }
   });
+
+  console.log(flatRoutes);
+
   return flatRoutes;
 };

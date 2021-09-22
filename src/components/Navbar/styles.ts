@@ -4,7 +4,7 @@ export const useStyles = makeStyles(theme => ({
     container: {
         backgroundColor: "#fff",
         zIndex: 1,
-        padding: 5,
+        padding: 0,
         marginTop: 5,
         boxShadow: "0px 5px 5px 5px rgba(0, 0, 0, 0.15)",
         position: 'relative',
@@ -93,7 +93,7 @@ export const useStyles = makeStyles(theme => ({
         width: 85,
         height: 35,
         "@media(max-width: 950px)": {
-            width: "200px",
+            width: "170px",
             marginTop: '0px',
         },
     },

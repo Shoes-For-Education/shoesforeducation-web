@@ -1,18 +1,19 @@
 import React from 'react';
-import { Route } from 'react-router';
-import { flattenRoutes, PrivateRoute } from './utils';
+import { authRoutes } from './auth';
+import { flattenRoutes, IRoute } from './utils';
 
 const HomePage = React.lazy(() => import('../pages/HomePage'));
 
-const rootRoute = {
+const rootRoute:IRoute = {
   path: '/',
   exact: true,
   component: HomePage,
-  route: PrivateRoute,
+  isPrivate: false,
 };
 
 const allRoutes = [
   rootRoute,
+  ...authRoutes,
 ];
 const allFlattenRoutes = flattenRoutes(allRoutes);
 
