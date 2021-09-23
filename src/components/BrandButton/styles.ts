@@ -21,6 +21,6 @@ export const useStyles = makeStyles(() => ({
         },
     },
     container: {
-        marginRight: 10,
+        marginRight: 0,
     }
 }));

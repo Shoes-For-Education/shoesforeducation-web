@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles(theme => ({
     container: {
         backgroundColor: "#fff",
-        zIndex: 1,
+        zIndex: 999,
         padding: 0,
         marginTop: 5,
         boxShadow: "0px 5px 5px 5px rgba(0, 0, 0, 0.15)",
@@ -12,7 +12,7 @@ export const useStyles = makeStyles(theme => ({
     },
     nav: {
         backgroundColor: "#fff",
-        zIndex: 1,
+        zIndex: 999,
         left: 10,
         marginTop: 5,
         right: 10,
@@ -40,7 +40,7 @@ export const useStyles = makeStyles(theme => ({
     logo: {
         width: 35,
         height: 35,
-        zIndex: 1,
+        zIndex: 1000,
         marginTop: 5
     },
     ul: {
@@ -56,9 +56,10 @@ export const useStyles = makeStyles(theme => ({
             height: '100vh',
             backgroundColor: "#fff",
             width: 200,
+            zIndex:999,
             top: -15,
             padding: 15,
-            paddingTop: 75,
+            paddingTop: 85,
             alignItems: "flex-start",
             boxShadow: "0px 0px 5px 2px rgba(0, 0, 0, 0.15)",
         },
