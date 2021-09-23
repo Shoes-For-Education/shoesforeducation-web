@@ -77,6 +77,7 @@ const SignUpPage = () => {
                         type="email"
                         variant="standard"
                         className={classes.input}
+                        style={{ width: "285px"}}
                     />
                     <FormControl 
                         sx={{ 
