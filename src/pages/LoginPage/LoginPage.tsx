@@ -11,17 +11,16 @@ import FormControl from '@mui/material/FormControl';
 import ShoeIcon from '../../components/ShoeIcon';
 import Page from '../../components/Page';
 
+type LoginPageProps = {};
+
 interface IState {
     password: string;
     showPassword: boolean;
     email: string; 
 }
 
-interface SignUpPageProps {
-    signUp: (e:IState) => void;  
-}
 
-const SignUpPage : React.FC<SignUpPageProps> = ({ signUp }) => {
+const LoginPage : React.FC<LoginPageProps> = () => {
     const classes = useStyles();
 
     const handleGoogleSignUp = (response:any) => {
@@ -54,13 +53,14 @@ const SignUpPage : React.FC<SignUpPageProps> = ({ signUp }) => {
         event.preventDefault();
       };
 
-    const handleSignUp = useCallback(() => {
+    const handleLogIn = useCallback(() => {
         const { password, email } : IState = values; 
         if (!password || !email) {
             return; 
         }; 
-        signUp(values);
+
     }, [ values ]);
+
 
     return (
         <Page 
@@ -78,7 +78,7 @@ const SignUpPage : React.FC<SignUpPageProps> = ({ signUp }) => {
                         }}
                     />
                 </div>
-                <Typography className={classes.title}>Sign Up</Typography>
+                <Typography className={classes.title}>Sign In</Typography>
                 <form className={classes.form}>
                     <TextField
                         id="standard-helperText"
@@ -116,38 +116,20 @@ const SignUpPage : React.FC<SignUpPageProps> = ({ signUp }) => {
                         }
                     />
                     </FormControl>
-                    {/* <TextField
-                        id="standard-select-currency"
-                        select
-                        label="Select"
-                        onChange={() => {}}
-                        required={false}
-                        className={classes.input}
-                        helperText="Gender (optional)"
-                        variant="standard"
-                        >
-                        {Object.keys(genderMap).map((key:any, index:number) => {
-                            const genderKey:EGender = key;
-
-                            return (<MenuItem key={index} value={key}>
-                                { genderMap[genderKey] }
-                            </MenuItem>
-                        )})} 
-                    </TextField> */}
                     <div className={classes.buttons}>
                         <BrandButton 
-                            onClick={handleSignUp}
-                            title="Create Account"
+                            onClick={handleLogIn}
+                            title="Sign In"
                             className={classes.signup}
                         />
                         <span className={classes.buttonLine}></span>
                         <GoogleLogin 
-                            className={classes.googleSignUp}
+                            className={classes.googleLogIn}
                             clientId="22"
                             onSuccess={handleGoogleSignUp}
                             onFailure={handleGoogleFaliure}
                             cookiePolicy={'single_host_origin'}
-                            buttonText="Sign Up With Google"
+                            buttonText="Log In With Google"
                         />
                     </div>
                 </form>
@@ -157,4 +139,4 @@ const SignUpPage : React.FC<SignUpPageProps> = ({ signUp }) => {
     )
 }
 
-export default SignUpPage; 
+export default LoginPage; 

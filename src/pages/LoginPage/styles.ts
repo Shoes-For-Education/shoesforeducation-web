@@ -65,7 +65,7 @@ export const useStyles = makeStyles(theme => ({
         backgroundColor: "rgba(0, 0, 0, 0.1)",
         margin: "10px 0px",
     },
-    googleSignUp: {
+    googleLogIn: {
         minWidth: 285,
         height: 42.5,
         marginTop: 5,

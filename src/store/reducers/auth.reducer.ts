@@ -1,3 +1,4 @@
+import { EAuthActions } from "../constants/auth";
 import { IAction } from "../interfaces/action.interface"
 
 export interface IAuthReducer {
@@ -14,6 +15,10 @@ const initialState = {
 
 const authReducer = (state:IAuthReducer = initialState, action:IAction) => {
     switch(action.type) {
+        case EAuthActions.SET_ACCESS_TOKEN: 
+            const tempState = { ...state };
+            state.user.accessToken = action.payload.accessToken; 
+            return tempState; 
         default:
             return state; 
     }

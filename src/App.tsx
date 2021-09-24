@@ -2,6 +2,8 @@ import { createTheme, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import Routes from './routes/Router';
 import "./index.css";
+import { Provider } from 'react-redux';
+import store from "./store/index";
 
 
 function App() {
@@ -20,7 +22,9 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Routes />
+      <Provider store={store}>
+        <Routes />
+      </Provider>
     </ThemeProvider>
   );
 }

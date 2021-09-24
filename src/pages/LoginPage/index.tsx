@@ -1,10 +1,14 @@
 import React from 'react';
+import Navbar from '../../components/Navbar';
+import LoginPageContent from "./LoginPage";
 
 const LoginPage = () => {
     return (
-        <div>
-            <p>hello</p>
-        </div>
+        <Navbar>
+            <div>
+                <LoginPageContent />
+            </div>
+        </Navbar>
     )
 }
 
