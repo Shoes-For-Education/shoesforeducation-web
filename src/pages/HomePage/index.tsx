@@ -36,8 +36,8 @@ const HomePage = () => {
                                 Donate today to help us continue providing our service.
                             </Typography>
                             <div className={classes.buttonGroup}>
-                            <BrandButton onClick={handleSignUp} title="Sign Up"/> 
-                            <BrandButton onClick={handleDonate} mode="secondary" title="Donate Today"/> 
+                            <BrandButton className={classes.button} onClick={handleSignUp} title="Sign Up"/> 
+                            <BrandButton className={classes.button} onClick={handleDonate} mode="secondary" title="Donate Today"/> 
                             </div>
                         </div>
                     </div>

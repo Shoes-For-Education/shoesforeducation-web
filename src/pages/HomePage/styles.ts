@@ -42,6 +42,9 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         marginTop: 15,
     },
+    button: {
+        marginRight: 10,
+    },
     slogan: {
         color: "grey",
         marginTop: 15,

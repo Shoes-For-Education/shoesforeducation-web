@@ -2,14 +2,12 @@ import { IconButton, Input, InputAdornment, InputLabel, MenuItem, Paper, TextFie
 import React, { useCallback } from 'react';
 import Books from "../../assets/books.jpg";
 import BrandButton from '../../components/BrandButton';
-import GoogleLogin from "react-google-login";
-import { genderMap } from '../../utils/mapping';
-import { EGender } from '../../store/enums/gender.enum';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import FormControl from '@mui/material/FormControl';
 import ShoeIcon from '../../components/ShoeIcon';
 import Page from '../../components/Page';
 import { useStyles } from './styles';
+import GoogleLogin from "react-google-login";
 
 type LoginPageProps = {};
 
@@ -96,7 +94,7 @@ const LoginPage : React.FC<LoginPageProps> = () => {
                             m: 1, 
                             width: '285px',
                             marginTop: "35px", 
-                        }} variant="standard">
+                        }}  style={{ marginTop: 35 }} variant="standard">
                     <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                     <Input
                         id="standard-adornment-password"
