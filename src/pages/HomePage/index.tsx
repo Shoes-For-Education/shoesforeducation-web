@@ -1,12 +1,12 @@
 import React from 'react';
 import Navbar from '../../components/Navbar';
-import { useStyles } from './styles';
 import clsx from 'clsx';
 import { Typography } from '@material-ui/core';
 import BrandButton from '../../components/BrandButton';
 import { useHistory } from 'react-router';
 import ShoeIcon from '../../components/ShoeIcon';
 import Page from "../../components/Page";
+import { useStyles } from './styles';
 
 const HomePage = () => {
     const classes = useStyles();
