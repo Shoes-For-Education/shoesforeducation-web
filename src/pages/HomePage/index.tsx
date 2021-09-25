@@ -7,6 +7,9 @@ import { useHistory } from 'react-router';
 import ShoeIcon from '../../components/ShoeIcon';
 import Page from "../../components/Page";
 import { useStyles } from './styles';
+import { isUserLoggedIn } from '../../store/selectors';
+import { IRootReducer } from '../../store/reducers';
+import { useSelector } from 'react-redux';
 
 const HomePage = () => {
     const classes = useStyles();
@@ -19,6 +22,9 @@ const HomePage = () => {
     const handleDonate= () => {
         return; 
     }
+
+    const state = useSelector((state:IRootReducer) => state); 
+    const loggedIn = isUserLoggedIn(state); 
 
     return (
         <Navbar>
@@ -36,7 +42,7 @@ const HomePage = () => {
                                 Donate today to help us continue providing our service.
                             </Typography>
                             <div className={classes.buttonGroup}>
-                            <BrandButton className={classes.button} onClick={handleSignUp} title="Sign Up"/> 
+                            { !loggedIn && <BrandButton className={classes.button} onClick={handleSignUp} title="Sign Up"/> }
                             <BrandButton className={classes.button} onClick={handleDonate} mode="secondary" title="Donate Today"/> 
                             </div>
                         </div>

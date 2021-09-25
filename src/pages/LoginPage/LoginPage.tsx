@@ -1,5 +1,5 @@
 import { IconButton, Input, InputAdornment, InputLabel, MenuItem, Paper, TextField, Typography } from '@material-ui/core';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Books from "../../assets/books.jpg";
 import BrandButton from '../../components/BrandButton';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -8,6 +8,11 @@ import ShoeIcon from '../../components/ShoeIcon';
 import Page from '../../components/Page';
 import { useStyles } from './styles';
 import GoogleLogin from "react-google-login";
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoginClient } from '../../store/actions/auth.actions';
+import { isUserLoggedIn } from '../../store/selectors';
+import { useHistory } from 'react-router';
+import { IRootReducer } from '../../store/reducers';
 
 type LoginPageProps = {};
 
@@ -20,6 +25,16 @@ interface IState {
 
 const LoginPage : React.FC<LoginPageProps> = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const state:IRootReducer = useSelector((state:IRootReducer) => state);
+    const loggedIn = isUserLoggedIn(state);
+
+    const redirectHome = useCallback(() => {
+        if (loggedIn) history.push('/');
+    }, [ loggedIn ]);
+
+    useEffect(redirectHome, [ redirectHome ]);
 
     const handleGoogleSignUp = (response:any) => {
         console.log(response);
@@ -56,7 +71,7 @@ const LoginPage : React.FC<LoginPageProps> = () => {
         if (!password || !email) {
             return; 
         }; 
-
+        dispatch(setLoginClient({ pass:password, email }));
     }, [ values ]);
 
 

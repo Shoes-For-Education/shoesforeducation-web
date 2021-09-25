@@ -81,6 +81,22 @@ export const useStyles = makeStyles(theme => ({
             width: "100%",
         },
     },
+    liUser: {
+        transition: "100ms ease",
+        listStyle: 'none',
+        paddingRight: 0,
+        paddingLeft: 30,
+        display: 'flex',
+        justifyContent: "space-between",
+        "&:hover": {
+            cursor: "pointer",
+        },
+        "@media(max-width: 950px)": {
+            paddingLeft: 0,
+            marginBottom: 35,
+            width: "100%",
+        }, 
+    },
     liContent: {
         fontSize: 14,
         color: "grey",
@@ -105,5 +121,9 @@ export const useStyles = makeStyles(theme => ({
         "@media(max-width: 950px)": {
            display: 'block',
         },
+    },
+    menuItem:{
+        color: 'grey',
+        fontSize: 14,
     }
 }));
