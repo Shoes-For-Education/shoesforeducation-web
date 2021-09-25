@@ -72,7 +72,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
             vertical: 'top',
             horizontal: 'right',
           }}
-          style={{ transform: 'translateX(-15px)' }}
+          style={{ transform: 'translateX(-15px)', padding: 10, }}
           open={isMenuOpen}
           onClose={handleMenuClose}
         >
@@ -85,7 +85,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
 
     return (
         <div className={classes.container}>
-            <nav className={classes.nav}>
+            <nav className={classes.nav} style={{ marginTop: 5, }}>
                 <img onClick={handleHome} className={classes.logo} src={Logo} alt="logo" />
                 <div className={classes.navIcon}>
                     <IconButton
