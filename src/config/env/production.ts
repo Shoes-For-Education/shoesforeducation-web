@@ -1,6 +1,6 @@
 const config = {
     api: {
-        url: "http://localhost:3001"
+        url: "https://staging-api.shoesforeducation.org"
     }
 }
 

@@ -1,30 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { useUsers } from './hooks/useUsers';
+import React, { useCallback, useEffect } from 'react';
+import Routes from './routes/Router';
+import "./index.css";
+import { useSelector } from 'react-redux';
+import { IRootReducer } from './store/reducers';
+import { getSnackbarEvent } from './store/selectors';
+import { useSnackbar } from 'notistack';
 
 function App() {
-  const users = useUsers();
+  const { enqueueSnackbar } = useSnackbar();
+  const state = useSelector((state:IRootReducer) => state);
+  const snackEvent = getSnackbarEvent(state);
 
-  console.log(users);
+  const enqueueSnackbarCallback = useCallback(() => {
+    const { content, variant } = snackEvent; 
+    if (!content) return; 
+    enqueueSnackbar(content, { variant, autoHideDuration: 1500, });
+  }, [ snackEvent ]);
+
+  useEffect(enqueueSnackbarCallback, [ enqueueSnackbarCallback ]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Routes />
+    </React.Fragment>
   );
 }
 
