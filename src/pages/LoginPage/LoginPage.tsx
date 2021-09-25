@@ -13,6 +13,7 @@ import { setLoginClient } from '../../store/actions/auth.actions';
 import { isUserLoggedIn } from '../../store/selectors';
 import { useHistory } from 'react-router';
 import { IRootReducer } from '../../store/reducers';
+import sha256 from 'crypto-js/sha256';
 
 type LoginPageProps = {};
 
@@ -71,7 +72,9 @@ const LoginPage : React.FC<LoginPageProps> = () => {
         if (!password || !email) {
             return; 
         }; 
-        dispatch(setLoginClient({ pass:password, email }));
+
+        const hashedPassword = sha256(password).toString();
+        dispatch(setLoginClient({ pass:hashedPassword, email }));
     }, [ values ]);
 
 

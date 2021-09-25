@@ -12,6 +12,7 @@ import { IRootReducer } from '../../store/reducers';
 import { useSelector } from 'react-redux';
 import { isUserLoggedIn } from '../../store/selectors';
 import { useHistory } from 'react-router';
+import sha256 from 'crypto-js/sha256';
 
 interface IState {
     password: string;
@@ -70,7 +71,8 @@ const SignUpPage : React.FC<SignUpPageProps> = ({ signUp }) => {
         if (!password || !email) {
             return; 
         }; 
-        signUp(values);
+        const hashedPassword = sha256(password).toString();
+        signUp({ ...values, password: hashedPassword });
     }, [ values ]);
 
     return (
