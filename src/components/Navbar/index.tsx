@@ -40,6 +40,10 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
         history.push("/")
     }
 
+    const handleBookPage = () => {
+        history.push("/books");
+    }
+
     const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -49,6 +53,11 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
     const handleMenuClose = () => {
         setIsMenuOpen(!isMenuOpen);
     };
+
+    const handleLogOutUser = () => {
+        history.push("/");
+        logOutUser();
+    }
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -68,7 +77,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
           onClose={handleMenuClose}
         >
           <MenuItem  
-            onClick={logOutUser}>
+            onClick={handleLogOutUser}>
                 <Typography className={classes.menuItem}>Sign Out</Typography>
             </MenuItem>
         </Menu>
@@ -103,7 +112,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                             icon={faChevronRight} 
                         />
                     </li>
-                    <li className={classes.li}>
+                    <li className={classes.li} onClick={handleBookPage}>
                         <Typography
                             className={classes.liContent}
                         >Book Choices</Typography>
