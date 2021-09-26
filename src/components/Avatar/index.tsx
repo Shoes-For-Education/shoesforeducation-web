@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
 type AvatarProps = {
-    url?: string;
+    url?: string | null;
 }
 
 const Avatar : React.FC<AvatarProps> = ({ url }) => {
@@ -18,7 +18,13 @@ const Avatar : React.FC<AvatarProps> = ({ url }) => {
                 aria-controls="primary-search-account-menu"
                 aria-haspopup="true"
             >
-                <AccountCircle className={classes.user}/>
+                { url ? (
+                    <div className={classes.userImg}>
+                        <img className={classes.userImg} src={url || ""} alt="Profile" />
+                    </div>
+                ) : (
+                    <AccountCircle className={classes.user}/>
+                )}
             </IconButton>
          </div>
     )

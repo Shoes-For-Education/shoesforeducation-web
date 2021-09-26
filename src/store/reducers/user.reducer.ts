@@ -11,12 +11,16 @@ export interface IUserReducer {
     }
 }
 
+const user = localStorage.getItem('user');
+const userObject = user ? JSON.parse(user) : {};
+
 const initialState:IUserReducer = {
     user: {
         _id: "",
         email: "",
         pass: "",
         accessToken: "",
+        ...userObject
     },
     snackbarEvent: {
         content: null,
