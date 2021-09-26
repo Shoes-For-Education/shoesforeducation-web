@@ -9,10 +9,13 @@ import Page from '../../components/Page';
 import { useStyles } from './styles';
 import GoogleLogin from "react-google-login";
 import { IRootReducer } from '../../store/reducers';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { isUserLoggedIn } from '../../store/selectors';
 import { useHistory } from 'react-router';
 import sha256 from 'crypto-js/sha256';
+import { setSnackbarEvent } from '../../store/actions/user.actions';
+import { setCreateGoogleClient } from '../../store/actions/auth.actions';
+import config from "../../config";
 
 interface IState {
     password: string;
@@ -28,6 +31,7 @@ const SignUpPage : React.FC<SignUpPageProps> = ({ signUp }) => {
     const classes = useStyles();
     const state:IRootReducer = useSelector((state:IRootReducer) => state);
     const loggedIn = isUserLoggedIn(state);
+    const dispatch = useDispatch();
     const history = useHistory();
 
     const redirectHome = useCallback(() => {
@@ -37,11 +41,29 @@ const SignUpPage : React.FC<SignUpPageProps> = ({ signUp }) => {
     useEffect(redirectHome, [ redirectHome ]);
 
     const handleGoogleSignUp = (response:any) => {
-        console.log(response);
+        try {
+            const { profileObj, tokenId } = response;
+            const { email, givenName, familyName, imageUrl } = profileObj; 
+            const data = {
+                email, tokenId,
+                firstName: givenName,
+                lastName: familyName,
+                avatar: imageUrl,
+            };
+            dispatch(setCreateGoogleClient(data));
+        } catch {
+            dispatch(setSnackbarEvent({ 
+                content: "Failed to Create Account",
+                variant: "error",
+            }));
+        }
     }
     
     const handleGoogleFaliure = () => {
-
+        dispatch(setSnackbarEvent({ 
+            content: "Failed to Create Account",
+            variant: "error",
+        }));
     };
 
     const [values, setValues] = React.useState<IState>({
@@ -156,7 +178,7 @@ const SignUpPage : React.FC<SignUpPageProps> = ({ signUp }) => {
                         <span className={classes.buttonLine}></span>
                         <GoogleLogin 
                             className={classes.googleSignUp}
-                            clientId="22"
+                            clientId={config?.google?.clientId}
                             onSuccess={handleGoogleSignUp}
                             onFailure={handleGoogleFaliure}
                             cookiePolicy={'single_host_origin'}

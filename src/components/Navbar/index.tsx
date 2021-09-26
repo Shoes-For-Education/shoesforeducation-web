@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Logo from "../../assets/icon.png";
 import { useHistory } from 'react-router';
-import { isUserLoggedIn } from '../../store/selectors';
+import { getUser, isUserLoggedIn } from '../../store/selectors';
 import Avatar from '../Avatar';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
@@ -24,7 +24,9 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
     const classes = useStyles();
     const history = useHistory();
     const state = useSelector((state:IRootReducer) => state); 
+
     const loggedIn = isUserLoggedIn(state); 
+    const user = getUser(state);
 
     const [ showNav, setShowNav ] = useState(false);
 
@@ -150,7 +152,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                             </>
                         ) : (
                             <li className={classes.liUser} onClick={handleProfileMenuOpen}>
-                                <Avatar />
+                                <Avatar url={user?.avatar || null}/>
                                 { renderMenu }
                             </li>
                         )
