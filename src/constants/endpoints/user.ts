@@ -1,0 +1,1 @@
+export const getUserEndpoint = (_id:string) => `user?_id=${_id}`;
