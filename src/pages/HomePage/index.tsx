@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import clsx from 'clsx';
 import { Typography } from '@material-ui/core';
@@ -10,6 +10,7 @@ import { useStyles } from './styles';
 import { isUserLoggedIn } from '../../store/selectors';
 import { IRootReducer } from '../../store/reducers';
 import { useSelector } from 'react-redux';
+import DonatePopUp from '../../components/DonatePopUp';
 
 const HomePage = () => {
     const classes = useStyles();
@@ -18,13 +19,15 @@ const HomePage = () => {
     const handleSignUp = () => {
         history.push("/signup");
     }
-
-    const handleDonate= () => {
-        return; 
-    }
-
+    
     const state = useSelector((state:IRootReducer) => state); 
     const loggedIn = isUserLoggedIn(state); 
+
+    const [ showDonate, setShowDonate ] = useState(false);
+
+    const handleDonateClose = () => setShowDonate(!showDonate);
+    const handleDonate= () => setShowDonate(!showDonate);
+
 
     return (
         <Navbar>
@@ -50,6 +53,7 @@ const HomePage = () => {
                     <div className={clsx(classes.subContainer)}>
                     <ShoeIcon style={{}}/>
                     </div>
+                    <DonatePopUp visible={showDonate} handleClose={handleDonateClose} />
                 </>
             </Page>
         </Navbar>
