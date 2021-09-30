@@ -27,7 +27,7 @@ const Page : React.FC<PageProps> = ({ children, className }) => {
         <section
             ref={page}
             className={clsx(classes.container, className)}
-            style={{ minHeight: 750, height: pageHeight }}
+            style={{ minHeight: 700, height: pageHeight }}
         >
             { children }
         </section>
