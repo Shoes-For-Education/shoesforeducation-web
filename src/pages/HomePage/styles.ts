@@ -24,6 +24,7 @@ export const useStyles = makeStyles((theme) => ({
         fontSize: "clamp(36px, 2.5vw, 2.5vw)"
     },
     shoes: {
+        opacity: 0,
         fontWeight: 'bold',
         fontSize: "clamp(50px, 4.25vw, 4.25vw)",
         color: "#181818",
@@ -39,6 +40,7 @@ export const useStyles = makeStyles((theme) => ({
         textShadow: "4px 0px #4ECDC4"
     },  
     buttonGroup: {
+        opacity: 0,
         display: 'flex',
         marginTop: 15,
     },
@@ -46,6 +48,7 @@ export const useStyles = makeStyles((theme) => ({
         marginRight: 10,
     },
     slogan: {
+        opacity: 0,
         color: "grey",
         marginTop: 15,
         marginBottom: 30,
