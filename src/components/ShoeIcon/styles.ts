@@ -22,6 +22,7 @@ export const useStyles = makeStyles(theme => ({
         maxWidth: 750,
         maxHeight: 750,
         height: "35vw",
+        transformOrigin: "center center",
         transform: "rotateZ(-15deg) scale(1.1)",
     },
 }));

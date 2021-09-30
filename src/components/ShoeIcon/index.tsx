@@ -1,6 +1,7 @@
 import { useStyles } from "./styles"
 import Shoes from "../../assets/shoe.png"
-import { height } from "@mui/system";
+import gsap, { Power3 } from "gsap";
+import { useCallback, useEffect, useRef } from "react";
 
 type ShoeIconProps = {
     style: {
@@ -8,13 +9,26 @@ type ShoeIconProps = {
         height?: number,
         minHeight?: number,
         minWidth?: number,
-    }
+    },
+    animation?: boolean,
 }
 
 const ShoeIcon : React.FC<ShoeIconProps> = ({ 
-    style: { minWidth, minHeight, width, height }
+    style: { minWidth, minHeight, width, height }, animation = false,
 }) => {
     const classes = useStyles();
+   
+    const ShoeRef = useRef<any | null>(null);
+
+    const handleShoeAnimation = useCallback(() => {
+        if (animation) {
+            gsap.fromTo(ShoeRef.current, 
+                { rotateZ: 0, scaleX: 1 }, 
+                { rotateZ: -15, scaleX: 1, duration: 1.5, ease: Power3.easeOut })
+        }
+    }, [ ShoeRef ]);  
+
+    useEffect(handleShoeAnimation, [ handleShoeAnimation ]);
 
     return (
         <div 
@@ -26,6 +40,7 @@ const ShoeIcon : React.FC<ShoeIconProps> = ({
                 minWidth: minWidth || "35vw"
             }}>
             <img 
+                ref={ShoeRef}
                 className={classes.shoe}
                 style={{
                     width: width|| 200,
