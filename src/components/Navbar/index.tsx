@@ -15,6 +15,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { logOutUser } from '../../utils/user';
 import { useSelector } from 'react-redux';
 import { IRootReducer } from '../../store/reducers';
+import DonatePopUp from '../DonatePopUp';
 
 type NavbarProps = {
     children: ReactChild;
@@ -46,7 +47,14 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
         history.push("/books");
     }
 
+    const handleRequestShoes = () => {
+        history.push("/request-shoes");
+    }
+
     const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
+    const [ donateVisible, setDonateVisible ] = useState<boolean>(false);
+
+    const handleDonate = () => setDonateVisible(!donateVisible);
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setIsMenuOpen(!isMenuOpen);
@@ -85,6 +93,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
         </Menu>
       );
 
+
     return (
         <div className={classes.container}>
             <nav className={classes.nav} style={{ marginTop: 5, }}>
@@ -105,7 +114,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                     style={{ transform: showNav || window.innerWidth >= 950 ? "translateX(0px)"  : "translateX(-230px)"}}
                     className={classes.ul}
                 >
-                    <li className={classes.li}>
+                    <li className={classes.li} onClick={handleRequestShoes}>
                         <Typography
                             className={classes.liContent}
                         >Request Shoes</Typography>
@@ -123,7 +132,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                             icon={faChevronRight} 
                         />
                     </li>
-                    <li className={classes.li}>
+                    <li className={classes.li} onClick={handleDonate}>
                         <Typography
                             className={classes.liContent}
                         >Donate</Typography>
@@ -160,6 +169,11 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                 </ul>
             </nav>
             { children }
+            {
+                true ? (
+                    <DonatePopUp visible={donateVisible} handleClose={handleDonate}/>
+                ) : null
+            }
         </div>
     )
 }
