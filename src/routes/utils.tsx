@@ -42,8 +42,5 @@ export const flattenRoutes = (routes: any) => {
       flatRoutes = [...flatRoutes, ...flattenRoutes(item.children)];
     }
   });
-
-  console.log(flatRoutes);
-
   return flatRoutes;
 };
