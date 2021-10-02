@@ -33,10 +33,15 @@ const DonatePopUp : React.FC<DonatePopUpProps> = ({
         setAmount(value);
     };
 
+    const handleCloseModal = () => {
+        document.body.style.overflow = "visible";
+        handleClose();
+    }
+
     return (
         <Modal
             open={visible}
-            onClose={handleClose}
+            onClose={handleCloseModal}
             closeAfterTransition
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
@@ -61,7 +66,7 @@ const DonatePopUp : React.FC<DonatePopUpProps> = ({
                 <BrandButton 
                     mode="secondary"
                     title="Cancel"
-                    onClick={handleClose}
+                    onClick={handleCloseModal}
                 />
                 <StripeCheckout
                     stripeKey={config?.stripe?.key || ""}
@@ -73,8 +78,8 @@ const DonatePopUp : React.FC<DonatePopUpProps> = ({
                 >
                     <BrandButton 
                         title="Continue"
-                        onClick={handleClose}
-                    />
+                        onClick={() => {}}
+                    /> 
                 </StripeCheckout>
             </Box>
           </Box>
