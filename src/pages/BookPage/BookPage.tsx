@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
-import { useBooksCatagories } from '../../hooks/useBooks';
+import { useBooksCatagories } from '../../hooks/useBookCatagories';
 import BookInfoModal from './components/BookInfoModal';
 import ShelfRow from './components/ShelfRow';
 import { useStyles } from "./styles";
