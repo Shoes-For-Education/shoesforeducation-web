@@ -1,16 +1,32 @@
 import Navbar from "../../components/Navbar";
 import Page from "../../components/Page";
-import { Box, TextField } from '@material-ui/core';
+import { Box, TextField, Typography } from '@material-ui/core';
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/selectors";
 import { IRootReducer } from "../../store/reducers";
-import { useStyles } from "./styles";
 import { MenuItem, Step, StepLabel, Stepper, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useBooks } from "../../hooks/useBooks";
 import BrandButton from "../../components/BrandButton";
 import PrizeSVG from "../../assets/prize.svg";
 import clsx from "clsx";
+import { useAddresses } from "../../hooks/useAddresses";
+import { useDebounce } from "use-debounce/lib";
+import { useStyles } from "./styles";
+
+type IAddressItem = {
+    address: any,
+    handleClick: (e:any) => void,
+}
+
+const AddressItem : React.FC<IAddressItem> = ({ address, handleClick }) => {
+    const classes = useStyles();
+    return (
+        <Box className={classes.addressContainer} onClick={() => { handleClick(address) }}>
+            <Typography>{ address?.description || "-" }</Typography>
+        </Box>
+    )
+}
 
 interface IRequestShoesForm {
     email: string,
@@ -19,10 +35,17 @@ interface IRequestShoesForm {
     summary?: string,
     firstName: string,
     lastName: string,
-    gender: "male" | "female" | "non binary"
+    gender: "male" | "female" | "non binary",
+    addressQuery: string,
+    address: any,
 }
 
 type BookFormProps = {
+    values: IRequestShoesForm,
+    setValues: (e:IRequestShoesForm) => void,
+}
+
+type PersonalFormProps = {
     values: IRequestShoesForm,
     setValues: (e:IRequestShoesForm) => void,
 }
@@ -32,7 +55,48 @@ type ShippingFormProps = {
     setValues: (e:IRequestShoesForm) => void,
 }
 
-const ShippingForm : React.FC<ShippingFormProps> = ({ values, setValues }) => {
+const ShippingForm : React.FC<ShippingFormProps>  = ({ values, setValues }) => {
+    const classes = useStyles();
+
+    const handleChange = (type:keyof IRequestShoesForm) => (e:React.ChangeEvent<HTMLInputElement>) => {
+        setValues({ ...values, [ type ] : e.target.value, address: {} });
+    }
+
+    const [ pattern ] = useDebounce(values.addressQuery, 250);
+    const { addresses } = useAddresses({ query: pattern });
+    
+    const handleClick = (e:any) => {
+        const { terms, description } = e; 
+        setValues({ ...values, addressQuery: description, address: { terms, description } });
+    };
+
+    return (
+        <Box className={classes.formType}>
+            <TextField
+                id="standard-helperText"
+                label="Address"
+                autoComplete={"off"}
+                value={values.addressQuery}
+                onChange={handleChange('addressQuery')}
+                placeholder=""
+                className={clsx(classes.input, classes.nameSegment)}
+                type="text"
+                variant="standard"
+                helperText="Shoe Delivery Address"
+                disabled={false}
+            /> 
+            { addresses.length && !Object.keys(values.address).length ? (
+                <Box className={classes.addresses}>
+                    { addresses.map((address, index) => {
+                        return <AddressItem handleClick={handleClick} key={index} address={address} />
+                    })}
+                </Box>
+            ) : null }
+        </Box>
+    )
+};
+
+const PersonalForm : React.FC<PersonalFormProps> = ({ values, setValues }) => {
     const classes = useStyles();
 
     const handleChange = (type:keyof IRequestShoesForm) => (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +149,7 @@ const ShippingForm : React.FC<ShippingFormProps> = ({ values, setValues }) => {
                     required={true}
                     helperText="Choose Gender"
                     variant="standard"
-                    className={clsx(classes.input, classes.nameSegment)}
+                    className={clsx(classes.input, classes.select, classes.nameSegment)}
                 >
                     <MenuItem value={"male"}>
                         Male
@@ -132,7 +196,7 @@ const BookForm : React.FC<BookFormProps> = ({ values, setValues }) => {
                     required={true}
                     helperText="Choose Book"
                     variant="standard"
-                    className={classes.input}
+                    className={clsx(classes.input, classes.select)}
                     >
                     {books.map((book:any, index:number) => {
                         return (
@@ -187,6 +251,8 @@ const RequestShoes = () => {
         firstName: user?.firstName || "",
         lastName: user?.lastName || "",
         gender: "male",
+        addressQuery: "",
+        address: {},
     });
 
     const [activeStep, setActiveStep] = useState(0);
@@ -225,7 +291,8 @@ const RequestShoes = () => {
                     </Stepper>
                     <form>
                         { activeStep === 0 && <BookForm values={values} setValues={handleSetValues} /> }
-                        { activeStep === 1 && <ShippingForm values={values} setValues={handleSetValues} /> }
+                        { activeStep === 1 && <PersonalForm values={values} setValues={handleSetValues} /> }
+                        { activeStep === 2 && <ShippingForm values={values} setValues={handleSetValues} /> }
                     </form>
                     <Box sx={{ display: 'flex', marginTop: 'auto', flexDirection: 'row', pt: 2 }}>
                         <BrandButton
