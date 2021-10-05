@@ -10,6 +10,7 @@ type BrandButtonProps = {
     color?: string; 
     className?: any,
     onClick: () => void; 
+    disabled?: boolean,
 }
 
 const BrandButton : React.FC<BrandButtonProps> = ({
@@ -17,6 +18,7 @@ const BrandButton : React.FC<BrandButtonProps> = ({
     className,
     onClick,
     title,
+    disabled = false,
 }) => {
 
     const classes = useStyles();
@@ -27,6 +29,7 @@ const BrandButton : React.FC<BrandButtonProps> = ({
                 onClick={onClick}
                 variant={"contained"}
                 color={mode === "brand" ? "primary" : "secondary"}
+                disabled={disabled}
                 className={
                 clsx(
                     classes.button,

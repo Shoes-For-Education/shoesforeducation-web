@@ -2,10 +2,10 @@ import { useCallback, useEffect, useState } from "react";
 import * as api from "../utils/api";
 import { BOOKS } from "../constants/endpoints/books";
 
-export const useBooksCatagories = () => {
-    const [ booksCatagories, setBooksCatagories ] = useState([]);
+export const useBooks = () => {
+    const [ books, setBooks ] = useState([]);
 
-    const getBooksCatagories = useCallback(async () => {
+    const getBooks = useCallback(async () => {
         const response = await api.get(BOOKS).catch(e => {
             console.error(e);
         });
@@ -15,12 +15,12 @@ export const useBooksCatagories = () => {
             return; 
         }
 
-        setBooksCatagories(data);
+        setBooks(data);
     }, []);
 
     useEffect(() => {
-        getBooksCatagories();
-    }, [ getBooksCatagories ]);
+        getBooks();
+    }, [ getBooks ]);
 
-    return { booksCatagories };
+    return { books };
 }

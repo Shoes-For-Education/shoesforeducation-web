@@ -26,6 +26,7 @@ const DonatePopUp : React.FC<DonatePopUpProps> = ({
 
     const handleToken = (token:any) => {
         dispatch(donateAction({ token, amount }));
+        handleCloseModal();
     };
 
     const handleAmountChange = (e:any) => {
