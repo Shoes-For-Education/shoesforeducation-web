@@ -1,0 +1,1 @@
+export const getAddresses = (query:string) => `google/addresses?query=${query}`;
