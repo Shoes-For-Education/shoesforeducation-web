@@ -38,9 +38,11 @@ interface IRequestShoesForm {
     gender: "male" | "female" | "non binary",
     addressQuery: string,
     address: any,
+    age?: number; 
 }
 
 type BookFormProps = {
+    books: any[],
     values: IRequestShoesForm,
     setValues: (e:IRequestShoesForm) => void,
 }
@@ -148,6 +150,7 @@ const PersonalForm : React.FC<PersonalFormProps> = ({ values, setValues }) => {
                     onChange={handleChange("gender")}
                     required={true}
                     helperText="Choose Gender"
+                    value={values.gender}
                     variant="standard"
                     className={clsx(classes.input, classes.select, classes.nameSegment)}
                 >
@@ -164,7 +167,9 @@ const PersonalForm : React.FC<PersonalFormProps> = ({ values, setValues }) => {
                 <TextField
                     id="standard-choose-age"
                     variant="standard"
+                    onChange={handleChange('age')}
                     label="Age"
+                    value={values?.age}
                     className={clsx(classes.input, classes.nameSegment)}
                     type="number"
                 />
@@ -173,9 +178,7 @@ const PersonalForm : React.FC<PersonalFormProps> = ({ values, setValues }) => {
     )
 }
 
-const BookForm : React.FC<BookFormProps> = ({ values, setValues }) => {
-    const { books } = useBooks();
-
+const BookForm : React.FC<BookFormProps> = ({ books, values, setValues }) => {
     const handleChange = (type:keyof IRequestShoesForm) => (e:React.ChangeEvent<HTMLInputElement>) => {
         setValues({ ...values, [ type ] : e.target.value });
     }
@@ -196,6 +199,7 @@ const BookForm : React.FC<BookFormProps> = ({ values, setValues }) => {
                     required={true}
                     helperText="Choose Book"
                     variant="standard"
+                    value={values.bookId}
                     className={clsx(classes.input, classes.select)}
                     >
                     {books.map((book:any, index:number) => {
@@ -230,8 +234,8 @@ const BookForm : React.FC<BookFormProps> = ({ values, setValues }) => {
                     multiline
                     rows={4}
                     onChange={handleChange('summary')}
-                    defaultValue=""
                     className={classes.input}
+                    value={values.summary}
                     variant="outlined"
                     helperText="What Did You Learn?"
                 />
@@ -257,6 +261,7 @@ const RequestShoes = () => {
 
     const [activeStep, setActiveStep] = useState(0);
     const steps = ['Book', 'Personal', 'Shipping'];
+    const { books } = useBooks();
 
     const handleNext = () => {    
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -270,8 +275,6 @@ const RequestShoes = () => {
     const handleSetValues = (payload:any) => {
         setValues(payload);
     }
-    
-    console.log(values);
 
     return (
         <Navbar>
@@ -290,7 +293,7 @@ const RequestShoes = () => {
                         })}
                     </Stepper>
                     <form>
-                        { activeStep === 0 && <BookForm values={values} setValues={handleSetValues} /> }
+                        { activeStep === 0 && <BookForm values={values} setValues={handleSetValues} books={books} /> }
                         { activeStep === 1 && <PersonalForm values={values} setValues={handleSetValues} /> }
                         { activeStep === 2 && <ShippingForm values={values} setValues={handleSetValues} /> }
                     </form>
