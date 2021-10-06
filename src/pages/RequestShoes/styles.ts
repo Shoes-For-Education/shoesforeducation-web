@@ -82,5 +82,9 @@ export const useStyles = makeStyles(theme => ({
         "&:hover": {
             opacity: 0.5,
         }
+    },
+    selectItem: {
+        display: "block",
+        padding: 7.5
     }
 }));
