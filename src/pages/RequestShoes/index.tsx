@@ -154,13 +154,13 @@ const PersonalForm : React.FC<PersonalFormProps> = ({ values, setValues }) => {
                     variant="standard"
                     className={clsx(classes.input, classes.select, classes.nameSegment)}
                 >
-                    <MenuItem value={"male"}>
+                    <MenuItem className={classes.selectItem} value={"male"}>
                         Male
                     </MenuItem>
-                    <MenuItem value={"female"}>
+                    <MenuItem className={classes.selectItem} value={"female"}>
                         Female
                     </MenuItem>
-                    <MenuItem value={"non binary"}>
+                    <MenuItem className={classes.selectItem} value={"non binary"}>
                         Non Binary
                     </MenuItem>
                 </TextField>
@@ -204,7 +204,7 @@ const BookForm : React.FC<BookFormProps> = ({ books, values, setValues }) => {
                     >
                     {books.map((book:any, index:number) => {
                         return (
-                            <MenuItem value={book._id} key={index}>
+                            <MenuItem className={classes.selectItem} value={book._id} key={index}>
                                 { book.name }
                             </MenuItem>
                         )
