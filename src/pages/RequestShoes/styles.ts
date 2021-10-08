@@ -33,6 +33,7 @@ export const useStyles = makeStyles(theme => ({
         margin: "10px 0px",
         minWidth: 300,
         width: "100%",
+        marginBottom: "10px !important"
     },
     proofButtons: {
         display: 'flex',
