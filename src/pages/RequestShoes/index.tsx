@@ -13,22 +13,11 @@ import clsx from "clsx";
 import { useAddresses } from "../../hooks/useAddresses";
 import { useDebounce } from "use-debounce/lib";
 import { useStyles } from "./styles";
+import BookForm from "./components/BookForm";
+import PersonalForm from "./components/PersonalForm";
+import ShippingForm from "./components/ShippingForm";
 
-type IAddressItem = {
-    address: any,
-    handleClick: (e:any) => void,
-}
-
-const AddressItem : React.FC<IAddressItem> = ({ address, handleClick }) => {
-    const classes = useStyles();
-    return (
-        <Box className={classes.addressContainer} onClick={() => { handleClick(address) }}>
-            <Typography>{ address?.description || "-" }</Typography>
-        </Box>
-    )
-}
-
-interface IRequestShoesForm {
+export interface IRequestShoesForm {
     email: string,
     bookId: string,
     proofType: 'written' | 'video',
@@ -39,208 +28,7 @@ interface IRequestShoesForm {
     addressQuery: string,
     address: any,
     age?: number; 
-}
-
-type BookFormProps = {
-    books: any[],
-    values: IRequestShoesForm,
-    setValues: (e:IRequestShoesForm) => void,
-}
-
-type PersonalFormProps = {
-    values: IRequestShoesForm,
-    setValues: (e:IRequestShoesForm) => void,
-}
-
-type ShippingFormProps = {
-    values: IRequestShoesForm,
-    setValues: (e:IRequestShoesForm) => void,
-}
-
-const ShippingForm : React.FC<ShippingFormProps>  = ({ values, setValues }) => {
-    const classes = useStyles();
-
-    const handleChange = (type:keyof IRequestShoesForm) => (e:React.ChangeEvent<HTMLInputElement>) => {
-        setValues({ ...values, [ type ] : e.target.value, address: {} });
-    }
-
-    const [ pattern ] = useDebounce(values.addressQuery, 250);
-    const { addresses } = useAddresses({ query: pattern });
-    
-    const handleClick = (e:any) => {
-        const { terms, description } = e; 
-        setValues({ ...values, addressQuery: description, address: { terms, description } });
-    };
-
-    return (
-        <Box className={classes.formType}>
-            <TextField
-                id="standard-helperText"
-                label="Address"
-                autoComplete={"off"}
-                value={values.addressQuery}
-                onChange={handleChange('addressQuery')}
-                placeholder=""
-                className={clsx(classes.input, classes.nameSegment)}
-                type="text"
-                variant="standard"
-                helperText="Shoe Delivery Address"
-                disabled={false}
-            /> 
-            { addresses.length && !Object.keys(values.address).length ? (
-                <Box className={classes.addresses}>
-                    { addresses.map((address, index) => {
-                        return <AddressItem handleClick={handleClick} key={index} address={address} />
-                    })}
-                </Box>
-            ) : null }
-        </Box>
-    )
-};
-
-const PersonalForm : React.FC<PersonalFormProps> = ({ values, setValues }) => {
-    const classes = useStyles();
-
-    const handleChange = (type:keyof IRequestShoesForm) => (e:React.ChangeEvent<HTMLInputElement>) => {
-        setValues({ ...values, [ type ] : e.target.value });
-    }
-
-    return (
-        <Box className={classes.formType}>
-            <Box className={classes.flex}>
-                <TextField
-                    id="standard-helperText"
-                    label="First Name"
-                    value={values.firstName}
-                    onChange={handleChange('firstName')}
-                    placeholder="Elon"
-                    className={clsx(classes.input, classes.nameSegment)}
-                    type="text"
-                    variant="standard"
-                    disabled={false}
-                />
-                <TextField
-                    id="standard-helperText"
-                    label="Last Name"
-                    value={values.lastName}
-                    onChange={handleChange('lastName')}
-                    placeholder="Musk"
-                    className={clsx(classes.input, classes.nameSegment)}
-                    type="text"
-                    variant="standard"
-                    disabled={false}
-                />
-            </Box>
-            <TextField
-                id="standard-helperText"
-                label="Email"
-                value={values.email}
-                onChange={handleChange('email')}
-                placeholder="example@gmail.com"
-                className={classes.input}
-                type="email"
-                variant="standard"
-                disabled={true}
-            />
-            <Box className={classes.flex}>
-                <TextField
-                    id="standard-select-gender"
-                    select
-                    label="Select"
-                    onChange={handleChange("gender")}
-                    required={true}
-                    helperText="Choose Gender"
-                    value={values.gender}
-                    variant="standard"
-                    className={clsx(classes.input, classes.select, classes.nameSegment)}
-                >
-                    <MenuItem className={classes.selectItem} value={"male"}>
-                        Male
-                    </MenuItem>
-                    <MenuItem className={classes.selectItem} value={"female"}>
-                        Female
-                    </MenuItem>
-                    <MenuItem className={classes.selectItem} value={"non binary"}>
-                        Non Binary
-                    </MenuItem>
-                </TextField>
-                <TextField
-                    id="standard-choose-age"
-                    variant="standard"
-                    onChange={handleChange('age')}
-                    label="Age"
-                    value={values?.age}
-                    className={clsx(classes.input, classes.nameSegment)}
-                    type="number"
-                />
-            </Box>
-        </Box>
-    )
-}
-
-const BookForm : React.FC<BookFormProps> = ({ books, values, setValues }) => {
-    const handleChange = (type:keyof IRequestShoesForm) => (e:React.ChangeEvent<HTMLInputElement>) => {
-        setValues({ ...values, [ type ] : e.target.value });
-    }
-    const classes = useStyles();
-
-    const handleProofTypeChange = (_:any, value:any) => {
-        if (!value) return; 
-        setValues({ ...values, "proofType": value });
-    };
-
-    return (
-        <Box className={classes.formType}>
-             <TextField
-                    id="standard-select-book"
-                    select
-                    label="Select"
-                    onChange={handleChange("bookId")}
-                    required={true}
-                    helperText="Choose Book"
-                    variant="standard"
-                    value={values.bookId}
-                    className={clsx(classes.input, classes.select)}
-                    >
-                    {books.map((book:any, index:number) => {
-                        return (
-                            <MenuItem className={classes.selectItem} value={book._id} key={index}>
-                                { book.name }
-                            </MenuItem>
-                        )
-                    })} 
-                </TextField>
-                <ToggleButtonGroup
-                    color="primary"
-                    value={values.proofType}
-                    exclusive
-                    className={classes.proofButtons}
-                    onChange={handleProofTypeChange}
-                    >
-                    <ToggleButton 
-                        className={classes.proofOption} 
-                        value="written">
-                            Written
-                    </ToggleButton>
-                    <ToggleButton 
-                        className={classes.proofOption} 
-                        value="video">
-                            Video
-                    </ToggleButton>
-                </ToggleButtonGroup>
-                <TextField
-                    id="filled-multiline-static"
-                    label="Book Summary"
-                    multiline
-                    rows={4}
-                    onChange={handleChange('summary')}
-                    className={classes.input}
-                    value={values.summary}
-                    variant="outlined"
-                    helperText="What Did You Learn?"
-                />
-        </Box>
-    )
+    shoeSize: string,
 }
 
 const RequestShoes = () => {
@@ -257,6 +45,7 @@ const RequestShoes = () => {
         gender: "male",
         addressQuery: "",
         address: {},
+        shoeSize: "",
     });
 
     const [activeStep, setActiveStep] = useState(0);

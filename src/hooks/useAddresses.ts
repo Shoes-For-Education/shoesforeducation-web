@@ -6,6 +6,8 @@ export const useAddresses = ({ query } : { query:string }) => {
     const [ addresses, setAddresses ] = useState<any[]>([]);
 
     const fetchAddresses = useCallback(async () => {
+        if (!query) return; 
+
         const response = await api.get(getAddresses(query)).catch(e => {
             console.error(e);
         });
