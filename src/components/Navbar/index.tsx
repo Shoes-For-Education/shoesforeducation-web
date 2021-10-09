@@ -13,9 +13,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import { logOutUser } from '../../utils/user';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IRootReducer } from '../../store/reducers';
 import DonatePopUp from '../DonatePopUp';
+import { setSnackbarEvent } from '../../store/actions/user.actions';
 
 type NavbarProps = {
     children: ReactChild;
@@ -24,6 +25,7 @@ type NavbarProps = {
 const Navbar : React.FC<NavbarProps> = ({ children }) => {
     const classes = useStyles();
     const history = useHistory();
+    const dispatch = useDispatch();
     const state = useSelector((state:IRootReducer) => state); 
 
     const loggedIn = isUserLoggedIn(state); 
@@ -48,6 +50,10 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
     }
 
     const handleRequestShoes = () => {
+        if (!isUserLoggedIn(state)) {
+            dispatch(setSnackbarEvent({ content: "Log in to Request Shoes", variant: "info" }));
+            return; 
+        }
         history.push("/request-shoes");
     }
 

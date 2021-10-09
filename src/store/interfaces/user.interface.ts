@@ -1,3 +1,5 @@
+import { EGender } from "../enums/gender.enum";
+
 export interface IUser {
     _id: string,
     email: string,
@@ -6,4 +8,10 @@ export interface IUser {
     avatar?: string;
     firstName?: string; 
     lastName?: string; 
+    address?: {
+        absolute?: string,
+    },
+    gender?: EGender,
+    age?: number,
+    shoeSize?:string,
 }

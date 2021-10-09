@@ -7,25 +7,34 @@ import { useHistory } from 'react-router';
 import ShoeIcon from '../../components/ShoeIcon';
 import Page from "../../components/Page";
 import { useStyles } from './styles';
-import { isUserLoggedIn } from '../../store/selectors';
+import { createdBookForm, isUserLoggedIn } from '../../store/selectors';
 import { IRootReducer } from '../../store/reducers';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import gsap from "gsap";
 import DonatePopUp from '../../components/DonatePopUp';
+import BookFormConfirmation from '../../components/BookFormConfirmation';
+import { setCreatedBookForm } from '../../store/actions/book-form.actions';
 
 const HomePage = () => {
     const classes = useStyles();
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const handleSignUp = () => {
         history.push("/signup");
     }
     
     const state = useSelector((state:IRootReducer) => state); 
+    const isCreated = createdBookForm(state);
     const loggedIn = isUserLoggedIn(state); 
 
-    const [ showDonate, setShowDonate ] = useState(false);
+    const [ showDonate, setShowDonate ] = useState<boolean>(false);
+    const [ showBookFormConfirmation, setShowBookFormConfirmation ] = useState<boolean>(isCreated);
 
+    const handleBookFormConfirmationClose = () => {
+        setShowBookFormConfirmation(!showBookFormConfirmation);
+        dispatch(setCreatedBookForm(false));
+    }
     const handleDonateClose = () => setShowDonate(!showDonate);
     const handleDonate= () => setShowDonate(!showDonate);
 
@@ -68,7 +77,14 @@ const HomePage = () => {
                     <div className={clsx(classes.subContainer)}>
                     <ShoeIcon animation={true} style={{}}/>
                     </div>
-                    <DonatePopUp visible={showDonate} handleClose={handleDonateClose} />
+                    <DonatePopUp 
+                        visible={showDonate} 
+                        handleClose={handleDonateClose} 
+                    />
+                    <BookFormConfirmation 
+                        visible={showBookFormConfirmation} 
+                        handleClose={handleBookFormConfirmationClose} 
+                    />
                 </>
             </Page>
         </Navbar>

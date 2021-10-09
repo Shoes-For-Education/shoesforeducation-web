@@ -7,9 +7,12 @@ export interface IAuthReducer {
     },
 }
 
+const user = localStorage.getItem('user');
+const accessToken = user ? JSON.parse(user).accessToken : "";
+
 const initialState = {
     user: {
-        accessToken: "",
+        accessToken,
     }
 }
 
