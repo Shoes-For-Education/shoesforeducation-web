@@ -25,7 +25,7 @@ const initialState:IUserReducer = {
     snackbarEvent: {
         content: null,
         variant: "default",
-    }
+    },
 }
 
 let tempState; 

@@ -14,6 +14,7 @@ const BookForm : React.FC<BookFormProps> = ({ books, values, setValues }) => {
     const handleChange = (type:keyof IRequestShoesForm) => (e:React.ChangeEvent<HTMLInputElement>) => {
         setValues({ ...values, [ type ] : e.target.value });
     }
+
     const classes = useStyles();
 
     const handleProofTypeChange = (_:any, value:any) => {
@@ -60,17 +61,21 @@ const BookForm : React.FC<BookFormProps> = ({ books, values, setValues }) => {
                             Video
                     </ToggleButton>
                 </ToggleButtonGroup>
-                <TextField
-                    id="filled-multiline-static"
-                    label="Book Summary"
-                    multiline
-                    rows={4}
-                    onChange={handleChange('summary')}
-                    className={classes.input}
-                    value={values.summary}
-                    variant="outlined"
-                    helperText="What Did You Learn?"
-                />
+                { values.proofType === "written" && (
+                    <TextField
+                        error={!values.summary && values.error}
+                        id="filled-multiline-static"
+                        label="Book Summary"
+                        multiline
+                        inputProps={{ maxLength: 10000 }}
+                        rows={4}
+                        onChange={handleChange('summary')}
+                        className={classes.input}
+                        value={values.summary}
+                        variant="outlined"
+                        helperText="What Did You Learn?"
+                    />
+                )}
         </Box>
     )
 }

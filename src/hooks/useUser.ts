@@ -11,6 +11,7 @@ export const useUser = ({ _id } : { _id: string }) => {
     const getUser = useCallback(async () => {
         if (!_id) {
             logOutUser();
+            return; 
         }
         const response = await api.get(getUserEndpoint(_id)).catch(e => {
             console.error(e);
@@ -24,7 +25,8 @@ export const useUser = ({ _id } : { _id: string }) => {
         };
 
         store.dispatch(setUser(data));
-        localStorage.setItem("user", JSON.stringify(data));
+        const accessToken = store.getState().auth.user.accessToken; 
+        localStorage.setItem("user", JSON.stringify({ ...data, accessToken }));
 
         setUpdatedUser(data);
     }, [_id]);

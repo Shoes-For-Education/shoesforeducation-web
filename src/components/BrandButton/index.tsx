@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import React from 'react';
 import { useStyles } from './styles';
 import { Button } from '@material-ui/core';
+import { CircularProgress } from '@mui/material';
 
 type BrandButtonProps = {
     title:string,
@@ -11,6 +12,7 @@ type BrandButtonProps = {
     className?: any,
     onClick: () => void; 
     disabled?: boolean,
+    loading?: boolean,
 }
 
 const BrandButton : React.FC<BrandButtonProps> = ({
@@ -19,6 +21,7 @@ const BrandButton : React.FC<BrandButtonProps> = ({
     onClick,
     title,
     disabled = false,
+    loading = false,
 }) => {
 
     const classes = useStyles();
@@ -29,7 +32,7 @@ const BrandButton : React.FC<BrandButtonProps> = ({
                 onClick={onClick}
                 variant={"contained"}
                 color={mode === "brand" ? "primary" : "secondary"}
-                disabled={disabled}
+                disabled={disabled || loading}
                 className={
                 clsx(
                     classes.button,
@@ -40,6 +43,19 @@ const BrandButton : React.FC<BrandButtonProps> = ({
                     textTransform: "capitalize",
                     whiteSpace: "nowrap",
                 }}>{ title }</Typography>
+                { loading && (
+                    <CircularProgress
+                        size={24}
+                        sx={{
+                            color: "#fff",
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            marginTop: '-12px',
+                            marginLeft: '-12px',
+                        }}
+                    />
+                )}
             </Button>
         </div>
     )
