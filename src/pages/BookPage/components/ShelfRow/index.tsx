@@ -23,7 +23,7 @@ const Book : React.FC<BookProps> = ({ book, index, onClick }) => {
         if (!BookRef?.current || !TargetRef?.current) return; 
 
         gsap.fromTo(BookRef.current, 
-            { opacity: 0, y: 250  }, 
+            { opacity: 0, y: 15  }, 
             { 
                 opacity: 1, 
                 y: 0, 

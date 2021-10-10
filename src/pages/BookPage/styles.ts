@@ -27,8 +27,8 @@ export const useStyles = makeStyles(theme => ({
         alignItems: "center",
     },
     bookStack: {
-        minWidth: 350,
-        width: "35vw",
+        minWidth: 300,
+        width: "30vw",
         height: "auto"
     },
     footerContent:{

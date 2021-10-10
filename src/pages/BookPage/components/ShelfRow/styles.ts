@@ -50,7 +50,6 @@ export const useStyles = makeStyles(theme => ({
         width: "auto",
         borderRadius: 10,
         height: 175,
-        boxShadow: "1px 1px 0px 3px rgba(0, 0, 0, 0.25)",
         "&:hover": {
             transform: "translateY(-5px)",
             opacity: 0.5,

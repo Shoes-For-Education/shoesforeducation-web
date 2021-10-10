@@ -38,7 +38,7 @@ const BookPageContent = () => {
             }
             <Box className={classes.extra}>
                 <img className={classes.bookStack} src={BookStackSVG} alt="book stack" />
-                <Typography className={classes.footerContent}>Watch Out! More Books Are Coming.</Typography>
+                { !catagories.length &&  <Typography className={classes.footerContent}>Watch Out! More Books Are Coming.</Typography> }
             </Box>
             <BookInfoModal book={book} visible={showBookModal} handleClose={handleToggleModal}/>
         </div>
