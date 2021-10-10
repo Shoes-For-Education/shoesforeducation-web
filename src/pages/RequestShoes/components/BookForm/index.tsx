@@ -1,7 +1,9 @@
 import { Box, TextField, MenuItem } from "@material-ui/core";
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import clsx from "clsx";
+import { useDispatch } from "react-redux";
 import { IRequestShoesForm } from "../..";
+import { setSnackbarEvent } from "../../../../store/actions/user.actions";
 import { useStyles } from "../../styles";
 
 type BookFormProps = {
@@ -16,10 +18,19 @@ const BookForm : React.FC<BookFormProps> = ({ books, values, setValues }) => {
     }
 
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const handleProofTypeChange = (_:any, value:any) => {
         if (!value) return; 
         setValues({ ...values, "proofType": value });
+    };
+
+    const handleVideo = (e:any) => {
+        e.preventDefault();
+        dispatch(setSnackbarEvent({
+            content: "Under Construction",
+            variant: "info",
+        }))
     };
 
     return (
@@ -56,6 +67,7 @@ const BookForm : React.FC<BookFormProps> = ({ books, values, setValues }) => {
                             Written
                     </ToggleButton>
                     <ToggleButton 
+                        onClick={handleVideo}
                         className={classes.proofOption} 
                         value="video">
                             Video

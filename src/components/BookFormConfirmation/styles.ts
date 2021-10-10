@@ -13,6 +13,9 @@ export const useStyles = makeStyles(theme => ({
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
+        "&:focus-visible": {
+            outline: "none",
+        },
     },
     image: {
         width: "85%",
