@@ -1,6 +1,6 @@
 import { IconButton, Input, InputAdornment, InputLabel, MenuItem, Paper, TextField, Typography } from '@material-ui/core';
 import React, { useCallback, useEffect } from 'react';
-import Books from "../../assets/books.png";
+import Books from "../../assets/books.jpg";
 import BrandButton from '../../components/BrandButton';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import FormControl from '@mui/material/FormControl';
