@@ -1,5 +1,6 @@
 import { useStyles } from "./styles"
-import Shoes from "../../assets/shoe.webp"
+import ShoesWEBP from "../../assets/shoe.webp"
+import ShoesPNG from "../../assets/shoe.png"
 import gsap, { Power3 } from "gsap";
 import { useCallback, useEffect, useRef } from "react";
 
@@ -40,15 +41,17 @@ const ShoeIcon : React.FC<ShoeIconProps> = ({
                 minWidth: minWidth || "35vw"
             }}>
             <picture>
-                <img 
-                    ref={ShoeRef}
-                    className={classes.shoe}
-                    style={{
-                        width: width|| 200,
-                        height: height || 200,
-                        minHeight: minHeight || "35vw",
-                        minWidth: minWidth || "35vw"
-                    }} src={Shoes} alt="shoe" />
+                <source srcSet={ShoesWEBP} type="image/webp" />
+                <source srcSet={ShoesPNG} type="image/png" />
+                    <img 
+                        ref={ShoeRef}
+                        className={classes.shoe}
+                        style={{
+                            width: width|| 200,
+                            height: height || 200,
+                            minHeight: minHeight || "35vw",
+                            minWidth: minWidth || "35vw"
+                        }} src={ShoesPNG} alt="shoe" />
             </picture>
         </div>
     )
