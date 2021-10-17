@@ -5,7 +5,7 @@ import BrandButton from '../BrandButton';
 import { useStyles } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import Logo from "../../assets/icon.png";
+import Logo from "../../assets/icon.webp";
 import { useHistory } from 'react-router';
 import { getUser, isUserLoggedIn } from '../../store/selectors';
 import Avatar from '../Avatar';

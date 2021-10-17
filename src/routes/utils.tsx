@@ -15,7 +15,7 @@ export const PrivateRoute = ({ component: Component, roles, ...rest } : any) => 
   return (
     <Route
       {...rest}
-      render={(props) => {
+      render={(props) => { 
         if (!isUserLoggedIn(store.getState())) {
           // not logged in so redirect to login page with the return url
           return (
