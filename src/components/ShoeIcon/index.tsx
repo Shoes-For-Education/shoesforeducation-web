@@ -41,7 +41,7 @@ const ShoeIcon : React.FC<ShoeIconProps> = ({
                 minWidth: minWidth || "35vw"
             }}>
             <picture>
-                <source srcSet={ShoesWEBP} type="image/webp" />
+                {/* <source srcSet={ShoesWEBP} type="image/webp" /> */}
                 <source srcSet={ShoesPNG} type="image/png" />
                     <img 
                         ref={ShoeRef}
