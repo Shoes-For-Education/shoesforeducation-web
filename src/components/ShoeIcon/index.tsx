@@ -42,7 +42,7 @@ const ShoeIcon : React.FC<ShoeIconProps> = ({
                 minWidth: minWidth || "35vw"
             }}>
             <img 
-                src={ShoesWEBP}
+                src={ShoesPNG}
                 ref={ShoeRef}
                 className={classes.shoe}
                 style={{
