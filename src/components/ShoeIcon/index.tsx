@@ -41,7 +41,18 @@ const ShoeIcon : React.FC<ShoeIconProps> = ({
                 minHeight: minHeight || "35vw",
                 minWidth: minWidth || "35vw"
             }}>
-            <ImageWithFallback 
+            <img 
+                src={ShoesPNG}
+                ref={ShoeRef}
+                className={classes.shoe}
+                style={{
+                    width: width|| 200,
+                    height: height || 200,
+                    minHeight: minHeight || "35vw",
+                    minWidth: minWidth || "35vw"
+                }} 
+            />
+            {/* <ImageWithFallback 
                 src={ShoesPNG}
                 type="image/webp"
                 fallbackSrc={ShoesPNG}
@@ -53,7 +64,7 @@ const ShoeIcon : React.FC<ShoeIconProps> = ({
                     minHeight: minHeight || "35vw",
                     minWidth: minWidth || "35vw"
                 }} 
-            />
+            /> */}
         </div>
     )
 }
