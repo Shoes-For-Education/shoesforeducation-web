@@ -26,6 +26,7 @@ export const useStyles = makeStyles(theme => ({
         overflow: 'hidden',
         "@media(max-width: 950px)": {
             width: "100%",
+            minHeight: 225,
          },
     },  
     bookImage: {
