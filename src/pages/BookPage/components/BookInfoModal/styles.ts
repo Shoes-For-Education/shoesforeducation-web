@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles(theme => ({
     container: {
         width: 750,
-        height: 450,
+        minHeight: 450,
         borderRadius: 5,
         backgroundColor: "#fff",
         marginLeft: "50%",
@@ -24,9 +24,10 @@ export const useStyles = makeStyles(theme => ({
         borderRadius: 5,
         marginRight: 15,
         overflow: 'hidden',
+        maxHeight: 250,
         "@media(max-width: 950px)": {
             width: "100%",
-            minHeight: 225,
+            minHeight: 200,
          },
     },  
     bookImage: {
@@ -47,6 +48,10 @@ export const useStyles = makeStyles(theme => ({
         fontSize: 14,
         color: "grey",
         marginTop: 15,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        wordBreak: 'break-all',
+        maxHeight: 125,
     },
     bookDetailsContainer: {
         width: "50%",
