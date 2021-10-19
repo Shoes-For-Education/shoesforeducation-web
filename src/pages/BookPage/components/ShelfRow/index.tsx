@@ -30,9 +30,9 @@ const Book : React.FC<BookProps> = ({ book, index, onClick }) => {
                 duration: 0.5, 
                 ease: Power1.easeOut, 
                 delay: 0.05 * index,
-                // scrollTrigger: {
-                //     trigger: TargetRef.current,
-                // }
+                scrollTrigger: {
+                    trigger: TargetRef.current,
+                }
             }
         )
     }, [ BookRef, gsap, TargetRef ]);

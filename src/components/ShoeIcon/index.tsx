@@ -1,5 +1,5 @@
 import { useStyles } from "./styles"
-// import ShoesWEBP from "../../assets/shoe.webp"
+import ShoesWEBP from "../../assets/shoe-optimized.webp"
 import ShoesPNG from "../../assets/shoe.png"
 import gsap, { Power3 } from "gsap";
 import { useCallback, useEffect, useRef } from "react";
