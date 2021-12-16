@@ -34,6 +34,7 @@ export interface IRequestShoesForm {
     age?: number; 
     error: boolean,
     shoeSize: string,
+    videoFormData: FormData | null,
 }
 
 const RequestShoes = () => {
@@ -43,8 +44,9 @@ const RequestShoes = () => {
     const dispatch = useDispatch();
 
     const [ values, setValues ] = useState<IRequestShoesForm>({
+        videoFormData: null,
         email: user?.email || "",
-        proofType: EProofType.WRITTEN,
+        proofType: EProofType.VIDEO,
         bookId: "",
         summary: "",
         firstName: user?.firstName || "",
@@ -104,6 +106,9 @@ const RequestShoes = () => {
                 } else if (values.proofType === EProofType.WRITTEN && !values.summary) {
                     handleEmptyFields();
                     return; 
+                } else if (values.proofType === EProofType.VIDEO && !values.videoFormData?.get('image')) {
+                    handleEmptyFields();
+                    return; 
                 };
                 break; 
             }
@@ -138,6 +143,8 @@ const RequestShoes = () => {
 
         setLoading(!loading);
 
+        const bookFormData = new FormData();
+
         const payload:IBookRequestForm = {
             userId: user._id,
             firstName: values.firstName,
@@ -154,7 +161,17 @@ const RequestShoes = () => {
             shoeSize: values.shoeSize,
         };
 
-        dispatch(setCreateBookForm(payload));
+        bookFormData.append('fields', JSON.stringify(payload));
+       
+        const videos = values.videoFormData; 
+
+        if (videos) {
+            for (let [ _, value ] of (videos.entries() as any)) {
+                bookFormData.append('video', value);
+            }
+        };
+
+        dispatch(setCreateBookForm(bookFormData));
     }
     
     const handleBack = () => {

@@ -21,6 +21,7 @@ interface IState {
     password: string;
     showPassword: boolean;
     email: string; 
+    incomeValidated: boolean,
 }
 
 interface SignUpPageProps {
@@ -70,6 +71,7 @@ const SignUpPage : React.FC<SignUpPageProps> = ({ signUp }) => {
         password: '',
         showPassword: false,
         email: '',
+        incomeValidated: false,
       });
 
     const handleChange =
@@ -89,13 +91,26 @@ const SignUpPage : React.FC<SignUpPageProps> = ({ signUp }) => {
       };
 
     const handleSignUp = useCallback(() => {
-        const { password, email } : IState = values; 
+        const { password, email, incomeValidated } : IState = values; 
+
         if (!password || !email) {
+            dispatch(setSnackbarEvent({ content: "Please Fill Out All of the Fields", variant: "error" }));
             return; 
         }; 
+
+        if (!incomeValidated) {
+            dispatch(setSnackbarEvent({ content: "Not Eligible to Create an Account", variant: "error" }));
+            return;     
+        }
+
         const hashedPassword = sha256(password).toString();
         signUp({ ...values, password: hashedPassword });
     }, [ values ]);
+
+    const handleIncomeValidateCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.checked; 
+        setValues({ ...values, incomeValidated: value });
+    };
 
     return (
         <Page 
@@ -133,24 +148,42 @@ const SignUpPage : React.FC<SignUpPageProps> = ({ signUp }) => {
                             marginTop: "35px",
                         }}  style={{ marginTop: 35 }}  variant="standard">
                     <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                    <Input
-                        id="standard-adornment-password"
-                        type={values.showPassword ? 'text' : 'password'}
-                        value={values.password}
-                        onChange={handleChange('password')}
-                        endAdornment={
-                        <InputAdornment position="end">
-                            <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            >
-                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                        </InputAdornment>
-                        }
-                    />
+                        <Input
+                            id="standard-adornment-password"
+                            type={values.showPassword ? 'text' : 'password'}
+                            value={values.password}
+                            onChange={handleChange('password')}
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                >
+                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                            }
+                        />
                     </FormControl>
+                    <div 
+                        style={{ 
+                            flexDirection: "row-reverse", 
+                            marginTop: 5,
+                            marginBottom: 10,
+                        }}  
+                        className={classes.flex}>
+                        <Typography
+                            className={classes.caption}
+                        >
+                            Annual Household income is less than 70,000 USD.
+                        </Typography>
+                        <input 
+                            onChange={handleIncomeValidateCheckbox}
+                            style={{ margin: "0px 10px" }} 
+                            type={"checkbox"} 
+                        />
+                    </div>
                     {/* <TextField
                         id="standard-select-currency"
                         select

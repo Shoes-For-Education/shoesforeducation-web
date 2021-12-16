@@ -14,5 +14,5 @@ export interface IBookRequestForm {
     summary?: string,
     proofType: EProofType,
     shoeSize: string,
-    bookId: string
+    bookId: string,
 }

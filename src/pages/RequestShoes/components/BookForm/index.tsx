@@ -3,8 +3,10 @@ import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import clsx from "clsx";
 import { useDispatch } from "react-redux";
 import { IRequestShoesForm } from "../..";
+import DropImage from "../../../../components/DropImage";
 import { setSnackbarEvent } from "../../../../store/actions/user.actions";
 import { useStyles } from "../../styles";
+import VideoRecorder from "../VideoRecorder";
 
 type BookFormProps = {
     books: any[],
@@ -25,12 +27,8 @@ const BookForm : React.FC<BookFormProps> = ({ books, values, setValues }) => {
         setValues({ ...values, "proofType": value });
     };
 
-    const handleVideo = (e:any) => {
-        e.preventDefault();
-        dispatch(setSnackbarEvent({
-            content: "Under Construction",
-            variant: "info",
-        }))
+    const handleFileData = (e:FormData) => {
+        setValues({ ...values, videoFormData: e });
     };
 
     return (
@@ -67,13 +65,12 @@ const BookForm : React.FC<BookFormProps> = ({ books, values, setValues }) => {
                             Written
                     </ToggleButton>
                     <ToggleButton 
-                        onClick={handleVideo}
                         className={classes.proofOption} 
                         value="video">
                             Video
                     </ToggleButton>
                 </ToggleButtonGroup>
-                { values.proofType === "written" && (
+                { values.proofType === "written" ? (
                     <TextField
                         error={!values.summary && values.error}
                         id="filled-multiline-static"
@@ -87,6 +84,24 @@ const BookForm : React.FC<BookFormProps> = ({ books, values, setValues }) => {
                         variant="outlined"
                         helperText="What Did You Learn?"
                     />
+                ) : (
+                    <div style={{ width: "100%" }}>
+                        <p 
+                            style={{ margin: "10px 0px "}}
+                            className={classes.text}
+                        >
+                            Upload a breif video explaining what the book was about and what you learned.
+                        </p>
+                        <DropImage 
+                            image={values.videoFormData ? function () {
+                                const image:any = values.videoFormData?.get('image');
+                                return image;
+                            }() : null}
+                            accept={['video/*', 'video/quicktime']}
+                            handleFileData={handleFileData}
+                        />
+                        {/* <VideoRecorder /> */}
+                    </div>
                 )}
         </Box>
     )

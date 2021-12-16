@@ -6,7 +6,7 @@ import {
 } from "../constants/book-form";
 import { IBookRequestForm } from "../interfaces/book-request-form.interface";
 
-export const setCreateBookForm = (payload:IBookRequestForm) : ISetCreateBookForm => ({
+export const setCreateBookForm = (payload:FormData) : ISetCreateBookForm => ({
     type: EBookFormActions.SET_CREATE_BOOK_FORM,
     payload, 
 });
