@@ -8,7 +8,7 @@ export enum EBookFormActions {
 
 export interface ISetCreateBookForm {
     type: EBookFormActions.SET_CREATE_BOOK_FORM,
-    payload: IBookRequestForm,
+    payload: FormData,
 }
 
 export interface ISetCreatedBookForm {

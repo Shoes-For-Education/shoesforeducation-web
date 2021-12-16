@@ -8,6 +8,16 @@ export const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         minHeight: '100vh',
     },
+    flex: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    caption: {
+        width: 275,
+        fontSize: 14,
+        color: theme.palette.grey[600],
+    },
     books: {
         zIndex: -1,
         width: '100%',

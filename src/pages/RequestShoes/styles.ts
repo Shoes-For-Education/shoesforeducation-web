@@ -12,7 +12,7 @@ export const useStyles = makeStyles(theme => ({
     },
     formContainer: {
         width: 600,
-        height: 465,
+        minHeight: 465,
         borderRadius: 15,
         boxShadow: "0px 0px 3px 0px rgba(0, 0, 0, 0.1)",
         padding: "25px 15px",
@@ -88,5 +88,10 @@ export const useStyles = makeStyles(theme => ({
     selectItem: {
         display: "block",
         padding: 7.5
+    },
+    text: {
+        color: theme.palette.grey[600],
+        fontSize: 15,
+        textAlign: 'left',
     }
 }));
