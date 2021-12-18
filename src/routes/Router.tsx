@@ -16,7 +16,7 @@ const Routes = (parentProps:any) => {
               {routes.map(({ path, exact, component, isPrivate }:IRoute, index:any) => {
                 return !isPrivate ? (
                   <Route key={index} path={path} exact={exact} component={component}/>
-                ) : <PrivateRoute key={index} component={component} /> 
+                ) : <PrivateRoute key={index} path={path} component={component} /> 
               })}
               <Redirect to="/" />
             </Switch>

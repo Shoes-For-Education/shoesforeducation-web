@@ -11,7 +11,6 @@ type BookInfoModalProps = {
 }
 
 const BookInfoModal : React.FC<BookInfoModalProps>  = ({ visible, handleClose, book }) => {
-    console.log(book);
     const classes = useStyles();
 
     return (

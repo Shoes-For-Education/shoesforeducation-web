@@ -1,6 +1,6 @@
 import { Typography } from '@material-ui/core';
 import IconButton from '@mui/material/IconButton';
-import React, { ReactChild, useState } from 'react';
+import React, { ReactChild, useRef, useState } from 'react';
 import BrandButton from '../BrandButton';
 import { useStyles } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -75,7 +75,12 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
         logOutUser();
     }
 
+    const handleAboutPage = () => {
+        history.push("/about");
+    }
+
     const menuId = 'primary-search-account-menu';
+    const menuRef = useRef<any | null>(null);
     const renderMenu = (
         <Menu
           anchorOrigin={{
@@ -91,6 +96,8 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
           style={{ transform: 'translateX(-15px)', padding: 10, }}
           open={isMenuOpen}
           onClose={handleMenuClose}
+          ref={menuRef}
+          anchorEl={menuRef.current}
         >
           <MenuItem  
             onClick={handleLogOutUser}>
@@ -133,6 +140,15 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                         <Typography
                             className={classes.liContent}
                         >Book Choices</Typography>
+                        <FontAwesomeIcon 
+                            className={classes.arrow}
+                            icon={faChevronRight} 
+                        />
+                    </li>
+                    <li className={classes.li} onClick={handleAboutPage}>
+                        <Typography
+                            className={classes.liContent}
+                        >About</Typography>
                         <FontAwesomeIcon 
                             className={classes.arrow}
                             icon={faChevronRight} 

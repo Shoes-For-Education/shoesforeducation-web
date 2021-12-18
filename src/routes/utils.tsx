@@ -1,4 +1,4 @@
-import { Redirect, Route } from 'react-router';
+import { Redirect, Route } from 'react-router-dom';
 // import { isUserLoggedIn } from '../utils/user';
 import React from 'react';
 import { isUserLoggedIn } from '../store/selectors';
@@ -15,6 +15,7 @@ export const PrivateRoute = ({ component: Component, roles, ...rest } : any) => 
   return (
     <Route
       {...rest}
+      exact
       render={(props) => { 
         if (!isUserLoggedIn(store.getState())) {
           // not logged in so redirect to login page with the return url

@@ -1,6 +1,7 @@
 import React from 'react';
 import { authRoutes } from './auth';
 import { userRoutes } from './user';
+import { infoRoutes } from "./info";
 import { flattenRoutes, IRoute } from './utils';
 
 const HomePage = React.lazy(() => import('../pages/HomePage'));
@@ -14,6 +15,7 @@ const rootRoute:IRoute = {
 
 const allRoutes = [
   rootRoute,
+  ...infoRoutes,
   ...authRoutes,
   ...userRoutes,
 ];

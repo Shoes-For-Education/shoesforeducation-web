@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles(theme => ({
     container: {
         width: 350,
-        height: 550,
+        minHeight: 550,
         backgroundColor: '#fff',
         marginLeft: "50%",
         marginTop: "50vh",

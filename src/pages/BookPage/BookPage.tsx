@@ -26,9 +26,10 @@ const BookPageContent = () => {
                 <Typography className={classes.header}>Choose Books from Here to Read.</Typography>
             </Box>
             {
-                catagories.map(catagory => {
+                catagories.map((catagory, index) => {
                     return (
                         <ShelfRow 
+                            key={index}
                             toggleBookModal={handleToggleModal} 
                             catagory={catagory}
                             setBook={handleSetBook}

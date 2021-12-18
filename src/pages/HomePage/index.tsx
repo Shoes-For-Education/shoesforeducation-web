@@ -70,7 +70,7 @@ const HomePage = () => {
                             </Typography>
                             <div ref={ButtonsRef} className={classes.buttonGroup}>
                             { !loggedIn && <BrandButton className={classes.button} onClick={handleSignUp} title="Sign Up"/> }
-                            <BrandButton className={classes.button} onClick={handleDonate} mode="secondary" title="Donate Today"/> 
+                            <BrandButton className={classes.button} onClick={handleDonate} mode="secondary" title="Help Needed"/> 
                             </div>
                         </div>
                     </div>
