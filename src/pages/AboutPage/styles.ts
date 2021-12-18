@@ -2,7 +2,10 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles(theme => ({
     headerHighlight: {
-        textShadow: "4px 0px #4ECDC4"
+        textShadow: "4px 0px #4ECDC4",
+        "@media (max-width: 900px)": {
+            textShadow: "none",
+        }
     },
     container: {
         marginTop: 65,
