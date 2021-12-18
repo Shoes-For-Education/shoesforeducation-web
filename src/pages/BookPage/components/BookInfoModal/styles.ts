@@ -49,7 +49,7 @@ export const useStyles = makeStyles(theme => ({
         marginTop: 15,
         overflowY: 'auto',
         overflowX: 'hidden',
-        wordBreak: 'break-all',
+        overflowWrap: "break-word",
         maxHeight: 125,
     },
     bookDetailsContainer: {

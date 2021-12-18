@@ -10,7 +10,6 @@ export const useUser = ({ _id } : { _id: string }) => {
 
     const getUser = useCallback(async () => {
         if (!_id) {
-            logOutUser();
             return; 
         }
         const response = await api.get(getUserEndpoint(_id)).catch(e => {

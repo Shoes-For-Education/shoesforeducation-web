@@ -50,8 +50,10 @@ const DonatePopUp : React.FC<DonatePopUpProps> = ({
           <Box className={classes.container}>
             <img className={classes.image} src={GiftSVG} alt="Gift"/>
             <p className={classes.label}>
-                We are initially donating 10,000 dollars to fund this Non Profit Organization.
-                Donate today to help our organization be able to continue to bring confidence to children.
+                You can become part of S4E by recommending the book which has made most impact in your life.
+                You can also support financially by providing one time or monthly sustaining contributions.
+                Remember your noble cause may be reason to change someone’s mindset and life forever!
+                How do I know? Because it changed mine…
             </p>
             <FormControl fullWidth sx={{ m: 1 }}>
                 <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
