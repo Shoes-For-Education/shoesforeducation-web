@@ -14,6 +14,7 @@ import gsap from "gsap";
 import DonatePopUp from '../../components/DonatePopUp';
 import BookFormConfirmation from '../../components/BookFormConfirmation';
 import { setCreatedBookForm } from '../../store/actions/book-form.actions';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
     const classes = useStyles();
@@ -66,7 +67,8 @@ const HomePage = () => {
                             <Typography ref={LabelRef} className={classes.slogan}>
                                 Every Kid Deserves Quality Shoes. 
                                 Every Kid Deserves Their Confidence.
-                                Donate today to help us continue providing our service.
+                                Donate today to help us continue providing our service.&nbsp; 
+                                <Link style={{ textDecoration: "none", color: "#4ECDC4" }} to="/about">Learn More.</Link>
                             </Typography>
                             <div ref={ButtonsRef} className={classes.buttonGroup}>
                             { !loggedIn && <BrandButton className={classes.button} onClick={handleSignUp} title="Sign Up"/> }

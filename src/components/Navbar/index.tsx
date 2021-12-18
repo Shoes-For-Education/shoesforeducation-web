@@ -62,7 +62,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
 
     const handleDonate = () => setDonateVisible(!donateVisible);
 
-    const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    const handleProfileMenuOpen = (_: React.MouseEvent<HTMLElement>) => {
         setIsMenuOpen(!isMenuOpen);
     };
   
@@ -106,6 +106,8 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
         </Menu>
       );
 
+    const handleMenu = () => setShowNav(!showNav);
+
 
     return (
         <div className={classes.container}>
@@ -113,7 +115,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                 <img onClick={handleHome} className={classes.logo} src={Logo} alt="logo" />
                 <div className={classes.navIcon}>
                     <IconButton
-                        onClick={() => setShowNav(!showNav)}
+                        onClick={handleMenu}
                         size="large"
                         edge="start"
                         color="inherit"
