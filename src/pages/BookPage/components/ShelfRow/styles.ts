@@ -1,4 +1,4 @@
-import { makeStyles } from "tss-react/mui";import BooksJPEG from "../../../assets/wood.png";
+import { makeStyles } from "tss-react/mui";
 
 export const useStyles = makeStyles()(theme => ({
     container: {
@@ -36,7 +36,7 @@ export const useStyles = makeStyles()(theme => ({
     bookContainer: {
         width: "auto",
         height: 200,
-        borderRadius: 15,
+        borderRadius: 5,
         display: 'flex',
         alignItems: 'center',
         padding: "5px 15px",
