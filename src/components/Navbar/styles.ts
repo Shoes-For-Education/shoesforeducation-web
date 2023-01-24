@@ -40,7 +40,10 @@ export const useStyles = makeStyles()(theme => ({
         width: 35,
         height: 35,
         zIndex: 1000,
-        marginTop: 5
+        marginTop: 5,       
+        "&:hover": {
+            cursor: "pointer"
+        }
     },
     ul: {
         transition: "150ms ease",
