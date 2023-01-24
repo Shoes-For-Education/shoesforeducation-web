@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import clsx from 'clsx';
-import { Typography } from '@material-ui/core';
 import BrandButton from '../../components/BrandButton';
 import { useHistory } from 'react-router';
 import ShoeIcon from '../../components/ShoeIcon';
@@ -15,9 +14,10 @@ import DonatePopUp from '../../components/DonatePopUp';
 import BookFormConfirmation from '../../components/BookFormConfirmation';
 import { setCreatedBookForm } from '../../store/actions/book-form.actions';
 import { Link } from 'react-router-dom';
+import { Typography } from '@mui/material';
 
 const HomePage = () => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
 

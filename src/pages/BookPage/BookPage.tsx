@@ -1,4 +1,3 @@
-import { Typography } from '@material-ui/core';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { useBooksCatagories } from '../../hooks/useBookCatagories';
@@ -6,9 +5,10 @@ import BookInfoModal from './components/BookInfoModal';
 import ShelfRow from './components/ShelfRow';
 import { useStyles } from "./styles";
 import BookStackSVG from "../../assets/book-stack.svg";
+import { Typography } from '@mui/material';
 
 const BookPageContent = () => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     const [ showBookModal, setShowBookModal ] = useState(false);
     const [ book, setBook ] = useState<any>({});

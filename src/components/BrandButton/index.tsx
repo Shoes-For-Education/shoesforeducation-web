@@ -1,9 +1,7 @@
-import { Typography } from '@material-ui/core';
 import clsx from 'clsx';
 import React from 'react';
 import { useStyles } from './styles';
-import { Button } from '@material-ui/core';
-import { CircularProgress } from '@mui/material';
+import { Button, CircularProgress, Typography } from '@mui/material';
 
 type BrandButtonProps = {
     title:string,
@@ -24,7 +22,7 @@ const BrandButton : React.FC<BrandButtonProps> = ({
     loading = false,
 }) => {
 
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     return (
         <div className={classes.container}>

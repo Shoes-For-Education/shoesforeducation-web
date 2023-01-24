@@ -1,16 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createTheme, ThemeProvider } from '@material-ui/core';
 import "./index.css";
 import { Provider } from 'react-redux';
 import store from "./store/index";
 import { SnackbarProvider } from 'notistack';
+import { createTheme, ThemeProvider } from '@mui/material';
+import { createRoot } from 'react-dom/client';
 
 const theme = createTheme({
   palette: {
-    type: 'light',
     primary: {
       main: "#FF6B6B",
     },
@@ -20,8 +19,10 @@ const theme = createTheme({
   },
 });
 
+const container = document.getElementById('root');
+const root = createRoot(container!); 
 
-ReactDOM.render(
+root.render(
   <React.StrictMode>
       <ThemeProvider theme={theme}>
       <Provider store={store}>
@@ -31,7 +32,6 @@ ReactDOM.render(
       </Provider>
     </ThemeProvider>
   </React.StrictMode>,
-  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

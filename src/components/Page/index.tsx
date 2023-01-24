@@ -8,7 +8,7 @@ type PageProps = {
 }
 
 const Page : React.FC<PageProps> = ({ children, className }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     const [ pageHeight, setPageHeight ] = useState<number>(window.innerHeight);
     const page = useRef<any | null>(null);

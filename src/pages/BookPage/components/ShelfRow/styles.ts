@@ -1,7 +1,6 @@
-import { makeStyles } from "@material-ui/core";
-import BooksJPEG from "../../../assets/wood.png";
+import { makeStyles } from "tss-react/mui";import BooksJPEG from "../../../assets/wood.png";
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles()(theme => ({
     container: {
         minWidth: "100vw",
         height: 225,

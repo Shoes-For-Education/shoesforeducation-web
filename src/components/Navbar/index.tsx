@@ -1,5 +1,3 @@
-import { Typography } from '@material-ui/core';
-import IconButton from '@mui/material/IconButton';
 import React, { ReactChild, useRef, useState } from 'react';
 import BrandButton from '../BrandButton';
 import { useStyles } from './styles';
@@ -9,21 +7,20 @@ import Logo from "../../assets/icon.png";
 import { useHistory } from 'react-router';
 import { getUser, isUserLoggedIn } from '../../store/selectors';
 import Avatar from '../Avatar';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import { logOutUser } from '../../utils/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootReducer } from '../../store/reducers';
 import DonatePopUp from '../DonatePopUp';
 import { setSnackbarEvent } from '../../store/actions/user.actions';
+import { IconButton, Menu, MenuItem, Typography } from '@mui/material';
 
 type NavbarProps = {
     children: ReactChild;
 }
 
 const Navbar : React.FC<NavbarProps> = ({ children }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
     const state = useSelector((state:IRootReducer) => state); 

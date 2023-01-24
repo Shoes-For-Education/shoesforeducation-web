@@ -1,7 +1,7 @@
 import { Typography, TextField } from "@material-ui/core";
 import { Box } from "@mui/system";
 import clsx from "clsx";
-import { useDebounce } from "use-debounce/lib";
+import { useDebounce } from "use-debounce";
 import { IRequestShoesForm } from "../..";
 import { useAddresses } from "../../../../hooks/useAddresses";
 import { useStyles } from "../../styles";
@@ -12,7 +12,7 @@ type IAddressItem = {
 }
 
 const AddressItem : React.FC<IAddressItem> = ({ address, handleClick }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     return (
         <Box className={classes.addressContainer} onClick={() => { handleClick(address) }}>
             <Typography>{ address?.description || "-" }</Typography>
@@ -26,7 +26,7 @@ type ShippingFormProps = {
 }
 
 const ShippingForm : React.FC<ShippingFormProps>  = ({ values, setValues }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     const handleChange = (type:keyof IRequestShoesForm) => (e:React.ChangeEvent<HTMLInputElement>) => {
         setValues({ ...values, [ type ] : e.target.value, address: {} });

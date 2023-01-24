@@ -4,7 +4,6 @@ import Modal from '@mui/material/Modal';
 import SuccessSVG from "../../assets/success.svg";
 import { useStyles } from "./styles";
 import BrandButton from '../BrandButton';
-import { Typography } from '@material-ui/core';
 
 type BookFormConfirmationProps = {
     visible: boolean;
@@ -15,7 +14,7 @@ const BookFormConfirmation : React.FC<BookFormConfirmationProps> = ({
     visible = false,
     handleClose,
 }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     const handleCloseModal = () => {
         document.body.style.overflow = "visible";

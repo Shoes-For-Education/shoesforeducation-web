@@ -8,7 +8,7 @@ type AvatarProps = {
 }
 
 const Avatar : React.FC<AvatarProps> = ({ url }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     return (
         <div>

@@ -1,10 +1,10 @@
-import { Typography } from '@material-ui/core';
 import { Box } from '@mui/system';
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useStyles } from './styles';
 import gsap from "gsap";
 import { Power1 } from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { Typography } from '@mui/material';
 
 type BookProps = {
     book: any,
@@ -13,7 +13,7 @@ type BookProps = {
 }
 
 const Book : React.FC<BookProps> = ({ book, index, onClick }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     gsap.registerPlugin(ScrollTrigger);
 
     const BookRef = useRef<any | null>(null);
@@ -64,7 +64,7 @@ type ShelfRowProps = {
 }
 
 const ShelfRow : React.FC<ShelfRowProps> = ({ catagory, toggleBookModal, setBook }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     const { name, books } = catagory; 
 
