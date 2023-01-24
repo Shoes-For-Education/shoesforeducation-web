@@ -15,6 +15,7 @@ import BookFormConfirmation from '../../components/BookFormConfirmation';
 import { setCreatedBookForm } from '../../store/actions/book-form.actions';
 import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
+import Footer from '../../components/Footer';
 
 const HomePage = () => {
     const { classes } = useStyles();
@@ -56,6 +57,7 @@ const HomePage = () => {
 
     return (
         <Navbar>
+            <>
             <Page className={classes.container}>
                 <>
                     <div className={clsx(classes.subContainer)}>
@@ -89,6 +91,8 @@ const HomePage = () => {
                     />
                 </>
             </Page>
+            <Footer />
+            </>
         </Navbar>
     )
 }
