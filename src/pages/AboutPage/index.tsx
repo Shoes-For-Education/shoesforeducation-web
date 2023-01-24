@@ -5,6 +5,7 @@ import { useStyles } from './styles';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { Typography } from '@mui/material';
+import Footer from '../../components/Footer';
 
 const Paragraph : React.FC<{ children:string | ReactChild }> = ({ children }) => {
     const { classes } = useStyles();
@@ -45,6 +46,7 @@ const AboutPage = () => {
 
     return (
         <Navbar>
+            <>
             <Page>
                 <section className={classes.container}>
                     <Typography className={classes.header}>
@@ -107,6 +109,8 @@ const AboutPage = () => {
                     </Paragraph>
                 </section>
             </Page>
+            <Footer />
+            </>
         </Navbar>
     )
 }

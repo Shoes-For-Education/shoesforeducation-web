@@ -8,7 +8,7 @@ export const useStyles = makeStyles()(theme => ({
         marginTop: "50vh",
         transform: "translate(-50%, -50%)",
         padding: 15,
-        borderRadius: 10,
+        borderRadius: 5,
         display: "flex",
         alignItems: "center",
         flexDirection: "column",

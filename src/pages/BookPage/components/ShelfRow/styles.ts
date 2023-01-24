@@ -47,7 +47,7 @@ export const useStyles = makeStyles()(theme => ({
     bookImage: {
         transition: "200ms ease-in",
         width: "auto",
-        borderRadius: 10,
+        borderRadius: 5,
         height: 175,
         "&:hover": {
             transform: "translateY(-5px)",

@@ -7,6 +7,7 @@ export const useStyles = makeStyles()(theme => ({
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: '100vh',
+        position: "relative",
     },
     flex: {
         display: 'flex',
@@ -21,8 +22,8 @@ export const useStyles = makeStyles()(theme => ({
     books: {
         zIndex: -1,
         width: '100%',
-        height: "65vh",
-        minHeight: 250,
+        height: "70vh",
+        minHeight: 350,
         objectFit: "cover",
         position: "absolute",
         top: "50%",
