@@ -108,7 +108,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
 
     return (
         <div className={classes.container}>
-            <nav className={classes.nav} style={{ marginTop: 5, }}>
+            <nav className={classes.nav} style={{ marginTop: 0, }}>
                 <img onClick={handleHome} className={classes.logo} src={Logo} alt="logo" />
                 <div className={classes.navIcon}>
                     <IconButton
