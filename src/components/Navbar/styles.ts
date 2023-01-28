@@ -9,7 +9,7 @@ export const useStyles = makeStyles()(theme => ({
     },
     nav: {
         top: 0,
-        backgroundColor: "rgba(255,255,255,0.95)",
+        backgroundColor: "rgba(255,255,255,0.9)",
         backdropFilter: "blur(8px)",
         zIndex: 999,
         left: 0,
@@ -20,12 +20,12 @@ export const useStyles = makeStyles()(theme => ({
         display: 'flex',
         justifyContent: "center",
         alignItems: "center",
-        paddingLeft: 15,
-        paddingRight: 15,
+        padding: "5px 15px",
+        borderBottom: "1px solid rgba(0,0,0,0.1)",
         "@media(max-width: 950px)": {
+            borderBottom: "none",
             marginTop: 0,
-            paddingTop: 0,
-            paddingRight: 0,
+            padding: "0px"
         },
     },
     navIcon: {

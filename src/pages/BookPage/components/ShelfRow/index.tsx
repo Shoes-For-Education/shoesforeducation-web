@@ -12,7 +12,7 @@ type BookProps = {
     onClick: (e:any) => void,
 }
 
-const Book : React.FC<BookProps> = ({ book, index, onClick }) => {
+const Book : React.FC<BookProps> = ({ book, onClick }) => {
     const { classes } = useStyles();
     gsap.registerPlugin(ScrollTrigger);
 
@@ -29,7 +29,7 @@ const Book : React.FC<BookProps> = ({ book, index, onClick }) => {
                 y: 0, 
                 duration: 0.5, 
                 ease: Power1.easeOut, 
-                delay: 0.05 * index,
+                delay: 0.05,
                 scrollTrigger: {
                     trigger: TargetRef.current,
                 }
@@ -53,6 +53,15 @@ const Book : React.FC<BookProps> = ({ book, index, onClick }) => {
                 src={book?.aws?.url} 
                 loading="lazy" 
                 alt={book?.name || "Book"}/>
+            <Typography 
+                style={{
+                    maxWidth: 100,
+                    textOverflow: "ellipsis",
+                    overflow: "hidden"
+                }}
+                className='text-white opacity-100 pt-1 whitespace-nowrap'>
+                { book?.name }
+            </Typography>
         </Box>
     )
 }

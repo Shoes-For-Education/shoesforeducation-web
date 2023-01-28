@@ -2,7 +2,7 @@ import { makeStyles } from "tss-react/mui";
 
 export const useStyles = makeStyles()(theme => ({
     container: {
-        marginTop: 100,
+        marginTop: 60,
     },
     shelfHeader: {
         height: 25,

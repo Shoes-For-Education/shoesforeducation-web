@@ -14,8 +14,10 @@ import DonatePopUp from '../../components/DonatePopUp';
 import BookFormConfirmation from '../../components/BookFormConfirmation';
 import { setCreatedBookForm } from '../../store/actions/book-form.actions';
 import { Link } from 'react-router-dom';
-import { Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import Footer from '../../components/Footer';
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay';
 
 const HomePage = () => {
     const { classes } = useStyles();
@@ -55,6 +57,8 @@ const HomePage = () => {
 
     useEffect(handleHomeAnimation, [ handleHomeAnimation ]);
 
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()]);
+
     return (
         <Navbar>
             <>
@@ -91,6 +95,27 @@ const HomePage = () => {
                     />
                 </>
             </Page>
+            {/* <section>
+                <div className="embla pb-10" ref={emblaRef}>
+                    <div className="embla__container w-min justify-center flex space-x-5">
+                        <Paper className='w-[500px] h-[300px]'>
+
+                        </Paper>
+                        <Paper className='w-[500px] h-[300px]'>
+
+                        </Paper>
+                        <Paper className='w-[500px] h-[300px]'>
+
+                        </Paper>
+                        <Paper className='w-[500px] h-[300px]'>
+
+                        </Paper>
+                        <Paper className='w-[500px] h-[300px]'>
+
+                        </Paper>
+                    </div>
+                </div>
+            </section> */}
             <Footer />
             </>
         </Navbar>

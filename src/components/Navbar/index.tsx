@@ -1,4 +1,4 @@
-import React, { ReactChild, useRef, useState } from 'react';
+import React, { ReactChild, useCallback, useEffect, useRef, useState } from 'react';
 import BrandButton from '../BrandButton';
 import { useStyles } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -105,6 +105,19 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
 
     const handleMenu = () => setShowNav(!showNav);
 
+    const [ isMobile, setIsMobile ] = useState(false);
+
+    const handleResize = useCallback(() => {
+        if (window.innerWidth >= 950) setIsMobile(false);
+        else setIsMobile(true);
+    }, []);
+
+    useEffect(() => { handleResize(); }, [ handleResize ]);
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+        return () => { window.removeEventListener("resize", handleResize); }
+    }, [ handleResize ]);
 
     return (
         <div className={classes.container}>
@@ -123,7 +136,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                     </IconButton>
                 </div>
                 <ul 
-                    style={{ transform: showNav || window.innerWidth >= 950 ? "translateX(0px)"  : "translateX(-230px)"}}
+                    style={{ transform: showNav || (!isMobile && window.innerWidth >= 950) ? "translateX(0px)"  : "translateX(-230px)"}}
                     className={classes.ul}
                 >
                     <li className={classes.li} onClick={handleRequestShoes}>

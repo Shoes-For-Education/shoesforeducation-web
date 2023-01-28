@@ -3,7 +3,6 @@ import { makeStyles } from "tss-react/mui";
 export const useStyles = makeStyles()(theme => ({
     container: {
         minWidth: "100vw",
-        height: 225,
         overflowY: "hidden",
         overflowX: "scroll",
         "&::-webkit-scrollbar": {
@@ -13,7 +12,7 @@ export const useStyles = makeStyles()(theme => ({
         },
     },
     shelf: {
-        height: 200,
+        height: 225,
         backgroundColor: "#985555",
         display: 'flex',
         overflowY: "hidden",
@@ -35,13 +34,15 @@ export const useStyles = makeStyles()(theme => ({
     },
     bookContainer: {
         width: "auto",
-        height: 200,
+        height: 225,
         borderRadius: 5,
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
         padding: "5px 15px",
         cursor: "pointer",
         opacity: 0,
+        flexDirection: "column",
         transform: "translateY(50px)",
     },
     bookImage: {
