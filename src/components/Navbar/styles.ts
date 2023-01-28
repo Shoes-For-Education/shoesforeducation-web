@@ -25,7 +25,7 @@ export const useStyles = makeStyles()(theme => ({
         "@media(max-width: 950px)": {
             borderBottom: "none",
             marginTop: 0,
-            padding: "0px"
+            padding: "5px 15px",
         },
     },
     navIcon: {

@@ -47,7 +47,7 @@ const AboutPage = () => {
     return (
         <Navbar>
             <>
-            <Page>
+            <Page className="flex flex-col items-center pb-14">
                 <section className={classes.container}>
                     <Typography className={classes.header}>
                         <>
