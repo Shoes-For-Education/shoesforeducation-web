@@ -1,6 +1,5 @@
-import { makeStyles } from "@material-ui/core";
-
-export const useStyles = makeStyles(theme => ({
+import { makeStyles } from "tss-react/mui";
+export const useStyles = makeStyles()(theme => ({
     headerHighlight: {
         textShadow: "4px 0px #4ECDC4",
         "@media (max-width: 900px)": {

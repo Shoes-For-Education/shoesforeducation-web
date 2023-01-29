@@ -18,7 +18,7 @@ type ShoeIconProps = {
 const ShoeIcon : React.FC<ShoeIconProps> = ({ 
     style: { minWidth, minHeight, width, height }, animation = false,
 }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
    
     const ShoeRef = useRef<any | null>(null);
 

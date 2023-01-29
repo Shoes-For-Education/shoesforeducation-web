@@ -1,11 +1,10 @@
 import Navbar from "../../components/Navbar";
 import Page from "../../components/Page";
-import { Box } from '@material-ui/core';
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createdBookForm, failedCreatingBookForm, getUser } from "../../store/selectors";
 import { IRootReducer } from "../../store/reducers";
-import { Step, StepLabel, Stepper } from "@mui/material";
+import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import { useBooks } from "../../hooks/useBooks";
 import BrandButton from "../../components/BrandButton";
 import PrizeSVG from "../../assets/prize.svg";
@@ -179,7 +178,7 @@ const RequestShoes = () => {
         setActiveStep({ index: prev, stage: Object.keys(requestShoesFormStepsMap)[prev] });
     };
 
-    const classes = useStyles();
+    const { classes } = useStyles();
     const handleSetValues = (payload:any) => {
         setValues(payload);
     }

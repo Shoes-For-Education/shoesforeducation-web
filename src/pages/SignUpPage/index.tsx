@@ -1,14 +1,13 @@
-import { Paper } from '@material-ui/core';
-import React, { useCallback } from 'react';
-import Books from "../../assets/books.jpg";
+import React from 'react';
 import Navbar from '../../components/Navbar';
 import { useStyles } from './styles';
 import SignUpPageContent from "./SignUpPage";
 import { useDispatch } from 'react-redux';
 import { setCreateClient } from '../../store/actions/auth.actions';
+import Footer from '../../components/Footer';
 
 const SignUpPage = () => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const dispatch = useDispatch();
 
     const signUp = ({ password:pass, email }:any) => {
@@ -17,10 +16,13 @@ const SignUpPage = () => {
 
     return (
         <Navbar>
+            <>
             <div 
                 style={{ minHeight: window.innerHeight }}>
                 <SignUpPageContent signUp={signUp}/>
             </div>
+            <Footer />
+            </>
         </Navbar>
     )
 }

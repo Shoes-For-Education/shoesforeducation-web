@@ -1,6 +1,6 @@
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "tss-react/mui";
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles()(() => ({
     button: {
         width: 150,
         height: 45,

@@ -1,6 +1,5 @@
-import { makeStyles } from "@material-ui/core";
-
-export const useStyles = makeStyles(theme => ({
+import { makeStyles } from "tss-react/mui";
+export const useStyles = makeStyles()(theme => ({
     container: {
         width: 350,
         minHeight: 550,
@@ -9,7 +8,7 @@ export const useStyles = makeStyles(theme => ({
         marginTop: "50vh",
         transform: "translate(-50%, -50%)",
         padding: 15,
-        borderRadius: 10,
+        borderRadius: 5,
         display: "flex",
         alignItems: "center",
         flexDirection: "column",

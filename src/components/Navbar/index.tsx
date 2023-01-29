@@ -1,6 +1,4 @@
-import { Typography } from '@material-ui/core';
-import IconButton from '@mui/material/IconButton';
-import React, { ReactChild, useRef, useState } from 'react';
+import React, { ReactChild, useCallback, useEffect, useRef, useState } from 'react';
 import BrandButton from '../BrandButton';
 import { useStyles } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,21 +7,20 @@ import Logo from "../../assets/icon.png";
 import { useHistory } from 'react-router';
 import { getUser, isUserLoggedIn } from '../../store/selectors';
 import Avatar from '../Avatar';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import { logOutUser } from '../../utils/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootReducer } from '../../store/reducers';
 import DonatePopUp from '../DonatePopUp';
 import { setSnackbarEvent } from '../../store/actions/user.actions';
+import { IconButton, Menu, MenuItem, Typography } from '@mui/material';
 
 type NavbarProps = {
     children: ReactChild;
 }
 
 const Navbar : React.FC<NavbarProps> = ({ children }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
     const state = useSelector((state:IRootReducer) => state); 
@@ -108,10 +105,23 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
 
     const handleMenu = () => setShowNav(!showNav);
 
+    const [ isMobile, setIsMobile ] = useState(false);
+
+    const handleResize = useCallback(() => {
+        if (window.innerWidth >= 950) setIsMobile(false);
+        else setIsMobile(true);
+    }, []);
+
+    useEffect(() => { handleResize(); }, [ handleResize ]);
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+        return () => { window.removeEventListener("resize", handleResize); }
+    }, [ handleResize ]);
 
     return (
         <div className={classes.container}>
-            <nav className={classes.nav} style={{ marginTop: 5, }}>
+            <nav className={classes.nav} style={{ marginTop: 0, }}>
                 <img onClick={handleHome} className={classes.logo} src={Logo} alt="logo" />
                 <div className={classes.navIcon}>
                     <IconButton
@@ -126,7 +136,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                     </IconButton>
                 </div>
                 <ul 
-                    style={{ transform: showNav || window.innerWidth >= 950 ? "translateX(0px)"  : "translateX(-230px)"}}
+                    style={{ transform: showNav || (!isMobile && window.innerWidth >= 950) ? "translateX(0px)"  : "translateX(-230px)"}}
                     className={classes.ul}
                 >
                     <li className={classes.li} onClick={handleRequestShoes}>

@@ -1,6 +1,6 @@
 import { faImages } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import clsx from 'clsx';
 import React, { ChangeEvent, useMemo, useState } from 'react';
@@ -14,7 +14,7 @@ type DropImageProps = {
 }
 
 const DropImage : React.FC<DropImageProps> = ({ disabled = false, handleFileData, image, accept = [] }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const [ dragging, setDragging ] = useState(false);
 
     const handleFileChange = (e:ChangeEvent<HTMLInputElement>) => {

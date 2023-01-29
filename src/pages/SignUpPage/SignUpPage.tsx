@@ -1,4 +1,3 @@
-import { IconButton, Input, InputAdornment, InputLabel, MenuItem, Paper, TextField, Typography } from '@material-ui/core';
 import React, { useCallback, useEffect } from 'react';
 import Books from "../../assets/books.jpg";
 import BrandButton from '../../components/BrandButton';
@@ -16,6 +15,7 @@ import sha256 from 'crypto-js/sha256';
 import { setSnackbarEvent } from '../../store/actions/user.actions';
 import { setCreateGoogleClient } from '../../store/actions/auth.actions';
 import config from "../../config";
+import { IconButton, Input, InputAdornment, InputLabel, Paper, TextField, Typography } from '@mui/material';
 
 interface IState {
     password: string;
@@ -29,7 +29,7 @@ interface SignUpPageProps {
 }
 
 const SignUpPage : React.FC<SignUpPageProps> = ({ signUp }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const state:IRootReducer = useSelector((state:IRootReducer) => state);
     const loggedIn = isUserLoggedIn(state);
     const dispatch = useDispatch();

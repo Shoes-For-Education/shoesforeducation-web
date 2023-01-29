@@ -1,7 +1,7 @@
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles()((theme) => ({
     container: {
         display: 'flex',
         alignItems: 'center',
@@ -26,7 +26,7 @@ export const useStyles = makeStyles((theme) => ({
     shoes: {
         opacity: 0,
         fontWeight: 'bold',
-        fontSize: "clamp(50px, 4.25vw, 4.25vw)",
+        fontSize: "clamp(50px, 5.25vw, 5.25vw)",
         color: "#181818",
         maxWidth: "30vw",
         "@media(max-width: 950px)": {
@@ -35,7 +35,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     shoesBold: {
         fontWeight: 'bold',
-        fontSize: "clamp(56px, 4.5vw, 4.5vw)",
+        fontSize: "clamp(56px, 5.25vw, 5.25vw)",
         color: "#181818",
         textShadow: "4px 0px #4ECDC4"
     },  

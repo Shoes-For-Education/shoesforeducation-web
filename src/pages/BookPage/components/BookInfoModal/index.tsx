@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from '@mui/material/Modal';
 import { useStyles } from "./styles";
 import { Box } from '@mui/system';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 
 type BookInfoModalProps = {
     visible: boolean; 
@@ -11,7 +11,7 @@ type BookInfoModalProps = {
 }
 
 const BookInfoModal : React.FC<BookInfoModalProps>  = ({ visible, handleClose, book }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     return (
         <Modal
