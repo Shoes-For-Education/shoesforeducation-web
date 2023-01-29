@@ -1,10 +1,10 @@
-import { Typography } from '@material-ui/core';
 import { Box } from '@mui/system';
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useStyles } from './styles';
 import gsap from "gsap";
 import { Power1 } from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { Typography } from '@mui/material';
 
 type BookProps = {
     book: any,
@@ -12,8 +12,8 @@ type BookProps = {
     onClick: (e:any) => void,
 }
 
-const Book : React.FC<BookProps> = ({ book, index, onClick }) => {
-    const classes = useStyles();
+const Book : React.FC<BookProps> = ({ book, onClick }) => {
+    const { classes } = useStyles();
     gsap.registerPlugin(ScrollTrigger);
 
     const BookRef = useRef<any | null>(null);
@@ -29,7 +29,7 @@ const Book : React.FC<BookProps> = ({ book, index, onClick }) => {
                 y: 0, 
                 duration: 0.5, 
                 ease: Power1.easeOut, 
-                delay: 0.05 * index,
+                delay: 0.05,
                 scrollTrigger: {
                     trigger: TargetRef.current,
                 }
@@ -53,6 +53,15 @@ const Book : React.FC<BookProps> = ({ book, index, onClick }) => {
                 src={book?.aws?.url} 
                 loading="lazy" 
                 alt={book?.name || "Book"}/>
+            <Typography 
+                style={{
+                    maxWidth: 100,
+                    textOverflow: "ellipsis",
+                    overflow: "hidden"
+                }}
+                className='text-white opacity-100 pt-1 whitespace-nowrap'>
+                { book?.name }
+            </Typography>
         </Box>
     )
 }
@@ -64,7 +73,7 @@ type ShelfRowProps = {
 }
 
 const ShelfRow : React.FC<ShelfRowProps> = ({ catagory, toggleBookModal, setBook }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     const { name, books } = catagory; 
 

@@ -1,9 +1,9 @@
-import _ from 'lodash';
+import extend from 'lodash/extend';
 
 const environment =
   process.env.REACT_APP_NODE_ENV || process.env.NODE_ENV || 'development';
 
-export default _.extend(
+export default extend(
   {
     environment,
   },

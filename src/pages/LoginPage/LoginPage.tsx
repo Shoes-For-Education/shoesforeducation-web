@@ -1,4 +1,3 @@
-import { IconButton, Input, InputAdornment, InputLabel, MenuItem, Paper, TextField, Typography } from '@material-ui/core';
 import React, { useCallback, useEffect } from 'react';
 import Books from "../../assets/books.jpg";
 import BrandButton from '../../components/BrandButton';
@@ -16,6 +15,7 @@ import { IRootReducer } from '../../store/reducers';
 import sha256 from 'crypto-js/sha256';
 import { setSnackbarEvent } from '../../store/actions/user.actions';
 import config from "../../config";
+import { IconButton, Input, InputAdornment, InputLabel, MenuItem, Paper, TextField, Typography } from '@mui/material';
 
 type LoginPageProps = {};
 
@@ -27,7 +27,7 @@ interface IState {
 
 
 const LoginPage : React.FC<LoginPageProps> = () => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const dispatch = useDispatch();
     const history = useHistory();
     const state:IRootReducer = useSelector((state:IRootReducer) => state);

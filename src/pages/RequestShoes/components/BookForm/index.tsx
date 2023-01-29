@@ -1,5 +1,4 @@
-import { Box, TextField, MenuItem } from "@material-ui/core";
-import { ToggleButtonGroup, ToggleButton } from "@mui/material";
+import { ToggleButtonGroup, ToggleButton, MenuItem, TextField, Box } from "@mui/material";
 import clsx from "clsx";
 import { useDispatch } from "react-redux";
 import { IRequestShoesForm } from "../..";
@@ -19,7 +18,7 @@ const BookForm : React.FC<BookFormProps> = ({ books, values, setValues }) => {
         setValues({ ...values, [ type ] : e.target.value });
     }
 
-    const classes = useStyles();
+    const { classes } = useStyles();
     const dispatch = useDispatch();
 
     const handleProofTypeChange = (_:any, value:any) => {

@@ -1,31 +1,31 @@
-import { makeStyles } from "@material-ui/core";
-
-export const useStyles = makeStyles(theme => ({
+import { makeStyles } from "tss-react/mui";
+export const useStyles = makeStyles()(theme => ({
     container: {
         backgroundColor: "#fff",
         zIndex: 999,
         padding: 0,
-        marginTop: 5,
-        boxShadow: "0px 5px 5px 5px rgba(0, 0, 0, 0.15)",
         position: 'relative',
         overflowX: "hidden",
     },
     nav: {
-        backgroundColor: "#fff",
+        top: 0,
+        backgroundColor: "rgba(255,255,255,0.9)",
+        backdropFilter: "blur(8px)",
         zIndex: 999,
-        left: 10,
-        marginTop: 5,
-        right: 10,
+        left: 0,
+        right: 0,
         height: 50,
         // boxShadow: "0px 0px 5px 2px rgba(0, 0, 0, 0.15)",
-        position: 'absolute',
+        position: 'fixed',
         display: 'flex',
-        paddingLeft: 5,
-        paddingRight: 25,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "5px 15px",
+        borderBottom: "1px solid rgba(0,0,0,0.1)",
         "@media(max-width: 950px)": {
+            borderBottom: "none",
             marginTop: 0,
-            paddingTop: 0,
-            paddingRight: 0,
+            padding: "5px 15px",
         },
     },
     navIcon: {
@@ -41,11 +41,15 @@ export const useStyles = makeStyles(theme => ({
         width: 35,
         height: 35,
         zIndex: 1000,
-        marginTop: 5
+        marginTop: 5,       
+        "&:hover": {
+            cursor: "pointer"
+        }
     },
     ul: {
         transition: "150ms ease",
         display: 'flex',
+        height: "100%",
         marginLeft: 'auto',
         marginBottom: 'auto',
         alignItems: 'center',

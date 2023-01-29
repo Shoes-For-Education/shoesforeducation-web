@@ -19,7 +19,7 @@ const DonatePopUp : React.FC<DonatePopUpProps> = ({
     visible = false,
     handleClose,
 }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const dispatch = useDispatch();
 
     const [ amount, setAmount ] = useState<number>(0);

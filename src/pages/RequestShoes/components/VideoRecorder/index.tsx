@@ -4,7 +4,7 @@ import { useStyles } from "./styles";
 const VideoRecorder = () => {
     const videoRef = useRef<HTMLVideoElement | null>(null);
 
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     useEffect(() => {
 

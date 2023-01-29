@@ -1,13 +1,14 @@
-import { Typography } from '@material-ui/core';
 import React, { ReactChild, useCallback, useEffect, useRef } from 'react';
 import Navbar from '../../components/Navbar';
 import Page from '../../components/Page';
 import { useStyles } from './styles';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { Typography } from '@mui/material';
+import Footer from '../../components/Footer';
 
 const Paragraph : React.FC<{ children:string | ReactChild }> = ({ children }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     const textRef = useRef<HTMLSpanElement | null>(null);
 
@@ -41,11 +42,12 @@ const Paragraph : React.FC<{ children:string | ReactChild }> = ({ children }) =>
 
 const AboutPage = () => {
     gsap.registerPlugin(ScrollTrigger);
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     return (
         <Navbar>
-            <Page>
+            <>
+            <Page className="flex flex-col items-center pb-14">
                 <section className={classes.container}>
                     <Typography className={classes.header}>
                         <>
@@ -107,6 +109,8 @@ const AboutPage = () => {
                     </Paragraph>
                 </section>
             </Page>
+            <Footer />
+            </>
         </Navbar>
     )
 }

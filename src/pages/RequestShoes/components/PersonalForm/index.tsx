@@ -1,4 +1,4 @@
-import { Box, TextField, MenuItem, Typography } from "@material-ui/core";
+import { Box, MenuItem, TextField, Typography } from "@mui/material";
 import clsx from "clsx";
 import { IRequestShoesForm } from "../..";
 import { useStyles } from "../../styles";
@@ -11,7 +11,7 @@ type PersonalFormProps = {
 }
 
 const PersonalForm : React.FC<PersonalFormProps> = ({ values, setValues }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     const handleChange = (type:keyof IRequestShoesForm) => (e:React.ChangeEvent<HTMLInputElement>) => {
         const updatedValues = { ...values, [ type ] : e.target.value }; 

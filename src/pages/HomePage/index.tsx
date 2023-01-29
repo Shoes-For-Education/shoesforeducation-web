@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import clsx from 'clsx';
-import { Typography } from '@material-ui/core';
 import BrandButton from '../../components/BrandButton';
 import { useHistory } from 'react-router';
 import ShoeIcon from '../../components/ShoeIcon';
@@ -15,9 +14,14 @@ import DonatePopUp from '../../components/DonatePopUp';
 import BookFormConfirmation from '../../components/BookFormConfirmation';
 import { setCreatedBookForm } from '../../store/actions/book-form.actions';
 import { Link } from 'react-router-dom';
+import { Paper, Typography, useTheme } from '@mui/material';
+import Footer from '../../components/Footer';
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay';
+import { useBooks } from '../../hooks/useBooks';
 
 const HomePage = () => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -54,8 +58,23 @@ const HomePage = () => {
 
     useEffect(handleHomeAnimation, [ handleHomeAnimation ]);
 
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, skipSnaps: false }, [Autoplay({
+        stopOnInteraction: false,
+        playOnInit: true,
+        delay: 3000
+    })]);
+
+    const { books } = useBooks();
+
+    const { palette } = useTheme(); 
+
+    useEffect(() => {
+        emblaApi?.reInit({ loop: true, skipSnaps: false });
+    }, [ books, emblaApi ]);
+
     return (
         <Navbar>
+            <>
             <Page className={classes.container}>
                 <>
                     <div className={clsx(classes.subContainer)}>
@@ -89,6 +108,35 @@ const HomePage = () => {
                     />
                 </>
             </Page>
+            <section className='md:mt-0 mt-10 flex flex-col items-center space-y-10'>
+                <h1
+                    style={{
+                        lineHeight: 1.3
+                    }}
+                    className='text-5xl text-center'>Explore Our  <span className={classes.shoesBold}>Handpicked</span> 2023 Book Choices.</h1>
+                <a 
+                    style={{
+                        border: `2px solid ${ palette.primary.main}`,
+                        color:  palette.primary.main
+                    }}
+                    href="/books" 
+                    className='no-underline text-lg p-4'>
+                        Explore Our Entire Collection
+                </a>
+                <div className="pb-10 max-w-7xl overflow-x-clip overflow-y-visible" ref={emblaRef}>
+                    <div className="flex space-x-5">
+                        {
+                            books.map((book: any, i) => (
+                                <div key={i}>
+                                    <img src={book.aws.url}/>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </section>
+            <Footer />
+            </>
         </Navbar>
     )
 }
