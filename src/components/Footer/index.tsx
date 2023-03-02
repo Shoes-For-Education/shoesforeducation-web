@@ -47,7 +47,7 @@ const Footer = () => {
         <footer>
             <div 
                 className={clsx(
-                    "w-full min-h-[100px] pb-3 bg-complementary-grey border-b-[rgba(255,255,255,0.1)] border-b-2 border-solid grid justify-items-center grid-cols-2 md:grid-cols-4 max-w-[1450px]",
+                    "w-full min-h-[100px] pb-3 bg-complementary-grey border-b-[rgba(255,255,255,0.1)] border-b-2 border-solid grid justify-items-center grid-cols-2 md:grid-cols-4",
                     "[&>ul]:flex [&>ul]:flex-col md:[&>ul]:items-start [&>ul]:items-center"
                 )}>
                 <ul>
