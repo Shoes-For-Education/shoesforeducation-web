@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import GiftSVG from "../../assets/gift.svg";
@@ -9,11 +9,14 @@ import config from "../../config";
 import { FormControl, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { donateAction } from '../../store/actions/payment';
+import clsx from 'clsx';
 
 type DonatePopUpProps = {
     visible: boolean;
     handleClose: () => void;
 }
+
+export const DONATE_MODAL_URL_PARAM = "donateModalVisible";
 
 const DonatePopUp : React.FC<DonatePopUpProps> = ({
     visible = false,
@@ -34,7 +37,14 @@ const DonatePopUp : React.FC<DonatePopUpProps> = ({
         setAmount(value);
     };
 
+
     const handleCloseModal = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has(DONATE_MODAL_URL_PARAM)) {
+            urlParams.delete(DONATE_MODAL_URL_PARAM)
+            window.history.replaceState(null, "", "?" + urlParams.toString());
+        }
+
         document.body.style.overflow = "visible";
         handleClose();
     }
@@ -59,9 +69,10 @@ const DonatePopUp : React.FC<DonatePopUpProps> = ({
                 <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
                 <OutlinedInput
                     id="outlined-adornment-amount"
-                    value={amount}
+                    value={amount || ""}
+                    placeholder='Enter an Amount'
                     onChange={handleAmountChange}
-                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                    startAdornment={<InputAdornment position="start">$ USD</InputAdornment>}
                     label="Amount"
                 />
             </FormControl>
@@ -71,19 +82,24 @@ const DonatePopUp : React.FC<DonatePopUpProps> = ({
                     title="Cancel"
                     onClick={handleCloseModal}
                 />
-                <StripeCheckout
-                    stripeKey={config?.stripe?.key || ""}
-                    token={handleToken}
-                    name=""
-                    panelLabel={`Donate`}
-                    currency="USD"
-                    amount={amount * 100}
-                >
-                    <BrandButton 
-                        title="Continue"
-                        onClick={() => {}}
-                    /> 
-                </StripeCheckout>
+                <div className={clsx(!amount && 'pointer-events-none')}>
+                    <StripeCheckout
+                        stripeKey={config?.stripe?.key || ""}
+                        token={handleToken}
+                        name=""
+                        
+                        panelLabel={`Donate`}
+                        currency="USD"
+                        amount={amount * 100}
+                    >
+                        <BrandButton 
+                            disabled={!amount}
+                            title="Continue"
+                            onClick={() => {
+                            }}
+                        /> 
+                    </StripeCheckout>
+                </div>
             </Box>
           </Box>
         </Modal>

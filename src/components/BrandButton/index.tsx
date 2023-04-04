@@ -8,7 +8,7 @@ type BrandButtonProps = {
     mode?: "brand" | "secondary";
     color?: string; 
     className?: any,
-    onClick: () => void; 
+    onClick: (e:any) => void; 
     disabled?: boolean,
     loading?: boolean,
 }
