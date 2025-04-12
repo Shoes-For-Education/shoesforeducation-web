@@ -11,7 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { logOutUser } from '../../utils/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootReducer } from '../../store/reducers';
-import DonatePopUp from '../DonatePopUp';
+import DonatePopUp, { DONATE_MODAL_URL_PARAM } from '../DonatePopUp';
 import { setSnackbarEvent } from '../../store/actions/user.actions';
 import { IconButton, Menu, MenuItem, Typography } from '@mui/material';
 
@@ -56,6 +56,11 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
 
     const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
     const [ donateVisible, setDonateVisible ] = useState<boolean>(false);
+
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has(DONATE_MODAL_URL_PARAM)) setDonateVisible(true);
+    }, []);
 
     const handleDonate = () => setDonateVisible(!donateVisible);
 
@@ -203,11 +208,7 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                 </ul>
             </nav>
             { children }
-            {
-                true ? (
-                    <DonatePopUp visible={donateVisible} handleClose={handleDonate}/>
-                ) : null
-            }
+            <DonatePopUp visible={donateVisible} handleClose={handleDonate}/>
         </div>
     )
 }

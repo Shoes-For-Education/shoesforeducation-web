@@ -123,12 +123,12 @@ const HomePage = () => {
                     className='no-underline text-lg p-4'>
                         Explore Our Entire Collection
                 </a>
-                <div className="pb-10 max-w-7xl overflow-x-clip overflow-y-visible" ref={emblaRef}>
-                    <div className="flex space-x-5">
+                <div className="pb-10 overflow-x-clip overflow-y-visible" ref={emblaRef}>
+                    <div className="flex space-x-14">
                         {
                             books.map((book: any, i) => (
-                                <div key={i}>
-                                    <img src={book.aws.url}/>
+                                <div className="w-[350px] shadow-2xl h-[550px] relative" key={i}>
+                                    <img className='h-full w-full object-cover' src={book.aws.url}/>
                                 </div>
                             ))
                         }
