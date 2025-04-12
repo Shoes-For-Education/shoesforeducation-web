@@ -26,12 +26,14 @@ function App() {
   }, []);
 
   const { user } = useUser({ _id: userId });
-  const handleSetUser = useCallback(() => {
-    dispatch(setUser({ ...user }));
-  }, [ user, dispatch  ]);
 
-  useEffect(handleSetUser, []);
-  useEffect(enqueueSnackbarCallback, []);
+  useEffect(() => {
+    dispatch(setUser({ ...user }));
+  }, [ user, dispatch ]);
+
+  useEffect(() => {
+    enqueueSnackbarCallback();
+  }, [enqueueSnackbarCallback]);
 
   return (
     <React.Fragment>

@@ -13,6 +13,8 @@ import { ECurrency } from '../../store/enums/currency.enum';
 import clsx from 'clsx';
 import { currencySymbolMap } from '../../utils/mapping';
 
+export const DONATE_MODAL_URL_PARAM = "donateModalVisible";
+
 type DonatePopUpProps = {
     visible: boolean;
     handleClose: () => void;
@@ -39,6 +41,12 @@ const DonatePopUp : React.FC<DonatePopUpProps> = ({
     };
 
     const handleCloseModal = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+         if (urlParams.has(DONATE_MODAL_URL_PARAM)) {
+             urlParams.delete(DONATE_MODAL_URL_PARAM)
+             window.history.replaceState(null, "", `?${urlParams.toString()}`); 
+         }
+
         document.body.style.overflow = "visible";
         handleClose();
     }
