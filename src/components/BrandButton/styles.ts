@@ -2,7 +2,7 @@ import { makeStyles } from "tss-react/mui";
 
 export const useStyles = makeStyles()(() => ({
     button: {
-        width: 150,
+        minWidth: 150,
         height: 45,
         borderRadius: 5,
         display: 'flex',
@@ -14,7 +14,6 @@ export const useStyles = makeStyles()(() => ({
         fontSize: 14,
         fontWeight: 500,
         textTransform: 'capitalize',
-        marginRight: 10,
         boxShadow: "none",
         "&:hover": {
             cursor: "pointer",

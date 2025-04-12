@@ -124,7 +124,7 @@ const DonatePopUp : React.FC<DonatePopUpProps> = ({
                     </FormControl>
                 )
             }
-            <Box className={classes.buttons}>
+            <div className={classes.buttons}>
                 <BrandButton 
                     mode="secondary"
                     title="Cancel"
@@ -155,7 +155,7 @@ const DonatePopUp : React.FC<DonatePopUpProps> = ({
                         /> 
                     )
                }
-            </Box>
+            </div>
           </Box>
         </Modal>
     )
