@@ -74,7 +74,7 @@ const Footer = () => {
                     &nbsp;<a href="https://mahitm.com/" target="_blank">mahitm.com</a>
                 </Typography>
                 <Typography className="text-white !text-sm md:!text-base">
-                    ©2023 Shoes For Education 501(c)(3) Non-Profit.
+                    ©2025 Shoes For Education 501(c)(3) Non-Profit.
                 </Typography>
             </div>
         </footer>
