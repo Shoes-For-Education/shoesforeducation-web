@@ -19,7 +19,6 @@ export const useStyles = makeStyles()(theme => ({
     },
     input: {
         margin: "10px 0px",
-        minWidth: 300,
         width: "100%",
         marginBottom: "10px !important"
     },
@@ -35,6 +34,10 @@ export const useStyles = makeStyles()(theme => ({
         maxWidth: 300,
         width: "85%",
         aspectRatio: "1.0",
+        "@media (max-width: 600px)": {
+            maxWidth: 200,
+            width: "100%",
+        }
     },
     label: {
         fontFamily: "roboto",
@@ -50,5 +53,6 @@ export const useStyles = makeStyles()(theme => ({
         display: "flex",
         justifyContent: "center",
         marginTop: "auto",
+        gap: 10
     }
 }));
