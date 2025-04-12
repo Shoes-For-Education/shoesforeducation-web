@@ -1,4 +1,4 @@
-import { IRootReducer } from "../reducers";
+import type { IRootReducer } from "../reducers";
 
 export const isUserLoggedIn = (state:IRootReducer) => {
     try {
