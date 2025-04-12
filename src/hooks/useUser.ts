@@ -5,7 +5,7 @@ import { logOutUser } from "../utils/user";
 import store from "../store";
 import { setUser } from "../store/actions/user.actions";
 
-export const useUser = ({ _id } : { _id: string }) => {
+export const useUser = ({ _id } : { _id: string }) : { user?: any } => {
     const [ user, setUpdatedUser ] = useState({});
 
     const getUser = useCallback(async () => {

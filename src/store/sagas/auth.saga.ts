@@ -1,9 +1,15 @@
 import { all, takeLatest } from "@redux-saga/core/effects";
-import { EAuthActions, ICreateClient, ICreateGoogleClient, ILoginClient, ILoginGoogleClient } from "../constants/auth";
+import { 
+    EAuthActions, 
+    type ICreateClient, 
+    type ICreateGoogleClient, 
+    type ILoginClient, 
+    type ILoginGoogleClient
+} from "../constants/auth";
 import * as api from "../../utils/api";
 import { CREATE_CLIENT, CREATE_GOOGLE_CLIENT, LOGIN_CLIENT, LOGIN_GOOGLE_CLIENT } from "../../constants/endpoints/auth";
-import { IRequestResponse, IRequestStatus } from "../constants/request";
-import { IUser } from "../interfaces/user.interface";
+import { type IRequestResponse, IRequestStatus } from "../constants/request";
+import type { IUser } from "../interfaces/user.interface";
 import { put } from "redux-saga/effects";
 import { setSnackbarEvent, setUser } from "../actions/user.actions";
 import { setAccessToken } from "../actions/auth.actions";
@@ -19,7 +25,8 @@ function* createClient({ payload } : ICreateClient ) : Generator<any> {
                 localStorage.setItem('user', JSON.stringify(data)) 
                 yield put(setSnackbarEvent({ content: "Created Account", variant: "success" }))
                 yield put(setAccessToken({ accessToken: data.accessToken }));
-                delete data.accessToken; 
+                data.accessToken = undefined;
+
                 yield put(setUser(data));
             } else { 
                 yield put(setSnackbarEvent({ content: "Failed to Create Account", variant: "error" }))
@@ -39,7 +46,8 @@ function* createGoogleClient({ payload } : ICreateGoogleClient ) : Generator<any
                 localStorage.setItem('user', JSON.stringify(data)) 
                 yield put(setSnackbarEvent({ content: "Created Account", variant: "success" }))
                 yield put(setAccessToken({ accessToken: data.accessToken }));
-                delete data.accessToken; 
+                data.accessToken = undefined;
+                 
                 yield put(setUser(data));
             } else { 
                 yield put(setSnackbarEvent({ content: "Failed to Create Account", variant: "error" }))
@@ -59,7 +67,8 @@ function* loginClient({ payload } : ILoginClient ) : Generator<any> {
                 yield put(setSnackbarEvent({ content: "Logged In", variant: "success" }))
                 localStorage.setItem('user', JSON.stringify(data));
                 yield put(setAccessToken({ accessToken: data.accessToken }));
-                delete data.accessToken; 
+                data.accessToken = undefined;
+                 
                 yield put(setUser(data));
             } else {
                 yield put(setSnackbarEvent({ content: "Failed to Login", variant: "error" }))
@@ -81,7 +90,8 @@ function* loginGoogleClient({ payload } : ILoginGoogleClient ) : Generator<any> 
                 yield put(setSnackbarEvent({ content: "Logged In", variant: "success" }))
                 localStorage.setItem('user', JSON.stringify(data));
                 yield put(setAccessToken({ accessToken: data.accessToken }));
-                delete data.accessToken; 
+                data.accessToken = undefined;
+
                 yield put(setUser(data));
             } else {
                 yield put(setSnackbarEvent({ content: "Failed to Login", variant: "error" }))

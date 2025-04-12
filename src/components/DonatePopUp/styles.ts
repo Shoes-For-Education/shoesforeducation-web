@@ -1,8 +1,9 @@
 import { makeStyles } from "tss-react/mui";
 export const useStyles = makeStyles()(theme => ({
     container: {
-        width: 350,
-        minHeight: 550,
+        width: "calc(100vw - 25px)",
+        maxWidth: 500,
+        minHeight: 525,
         backgroundColor: '#fff',
         marginLeft: "50%",
         marginTop: "50vh",
@@ -16,7 +17,22 @@ export const useStyles = makeStyles()(theme => ({
             outline: "none",
         },
     },
+    input: {
+        margin: "10px 0px",
+        minWidth: 300,
+        width: "100%",
+        marginBottom: "10px !important"
+    },
+    select: {
+        display: 'flex',
+        flexDirection: 'column',
+    },  
+    selectItem: {
+        display: "block",
+        padding: 7.5
+    },
     image: {
+        maxWidth: 300,
         width: "85%",
         aspectRatio: "1.0",
     },
@@ -32,7 +48,7 @@ export const useStyles = makeStyles()(theme => ({
     buttons: {
         width: "100%",
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: "center",
         marginTop: "auto",
     }
 }));

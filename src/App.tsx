@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import Routes from './routes/Router';
 import "./index.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { IRootReducer } from './store/reducers';
+import type { IRootReducer } from './store/reducers';
 import { getSnackbarEvent, getUser } from './store/selectors';
 import { useSnackbar } from 'notistack';
 import { useUser } from './hooks/useUser';
@@ -18,20 +18,20 @@ function App() {
     const { content, variant } = snackEvent; 
     if (!content) return; 
     enqueueSnackbar(content, { variant, autoHideDuration: 1500, });
-  }, [ snackEvent ]);
+  }, [ snackEvent, enqueueSnackbar ]);
 
   const userId = React.useMemo(() => {
     const data = localStorage.getItem("user"); 
     return data ? JSON.parse(data)?._id || null : null;
   }, []);
 
-  const { user } : any = useUser({ _id: userId });
+  const { user } = useUser({ _id: userId });
   const handleSetUser = useCallback(() => {
     dispatch(setUser({ ...user }));
-  }, [ user ]);
+  }, [ user, dispatch  ]);
 
-  useEffect(handleSetUser, [ handleSetUser ]);
-  useEffect(enqueueSnackbarCallback, [ enqueueSnackbarCallback ]);
+  useEffect(handleSetUser, []);
+  useEffect(enqueueSnackbarCallback, []);
 
   return (
     <React.Fragment>

@@ -19,9 +19,11 @@ export const useStyles = makeStyles()(theme => ({
     },
     bookImageContainer: {
         width: "50%",
-        height: "100%",
         borderRadius: 5,
         marginRight: 15,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         overflow: 'hidden',
         "@media(max-width: 950px)": {
             width: "100%",
@@ -29,9 +31,9 @@ export const useStyles = makeStyles()(theme => ({
          },
     },  
     bookImage: {
-        width: "auto",
+        width: "100%",
         minWidth: 350,
-        height: "100%",
+        height: "auto",
         borderRadius: 10,
         objectFit: 'cover',
         objectPosition: "top center",
