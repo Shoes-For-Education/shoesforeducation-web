@@ -7,7 +7,7 @@ import ShoeIcon from '../../components/ShoeIcon';
 import Page from "../../components/Page";
 import { useStyles } from './styles';
 import { createdBookForm, isUserLoggedIn } from '../../store/selectors';
-import { IRootReducer } from '../../store/reducers';
+import type { IRootReducer } from '../../store/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import gsap from "gsap";
 import DonatePopUp from '../../components/DonatePopUp';
@@ -113,7 +113,7 @@ const HomePage = () => {
                     style={{
                         lineHeight: 1.3
                     }}
-                    className='text-5xl text-center'>Explore Our  <span className={classes.shoesBold}>Handpicked</span> 2023 Book Choices.</h1>
+                    className='text-5xl text-center'>Explore Our  <span className={classes.shoesBold}>Handpicked</span> 2025 Book Choices.</h1>
                 <a 
                     style={{
                         border: `2px solid ${ palette.primary.main}`,
