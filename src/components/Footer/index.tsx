@@ -57,6 +57,7 @@ const Footer = () => {
                 </ul>
                 <ul>
                     <FooterHeader>Resources</FooterHeader>
+                    <FooterItem href="/requests">Shoe Requests</FooterItem>
                     <FooterItem href="/books">Book Choices</FooterItem>
                 </ul>
                 <ul>

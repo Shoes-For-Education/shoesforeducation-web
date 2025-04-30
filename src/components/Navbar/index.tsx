@@ -81,6 +81,14 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
         history.push("/about");
     }
 
+    const handleShoeRequestStatus = () => {
+        if (!isUserLoggedIn(state)) {
+            dispatch(setSnackbarEvent({ content: "Log in to check Request Status", variant: "info" }));
+            return; 
+        }
+        history.push("/requests");
+    }
+
     const menuId = 'primary-search-account-menu';
     const menuRef = useRef<any | null>(null);
     const renderMenu = (
@@ -144,15 +152,29 @@ const Navbar : React.FC<NavbarProps> = ({ children }) => {
                     style={{ transform: showNav || (!isMobile && window.innerWidth >= 950) ? "translateX(0px)"  : "translateX(-230px)"}}
                     className={classes.ul}
                 >
-                    <li className={classes.li} onClick={handleRequestShoes}>
-                        <Typography
-                            className={classes.liContent}
-                        >Request Shoes</Typography>
-                        <FontAwesomeIcon 
-                            className={classes.arrow}
-                            icon={faChevronRight} 
-                        />
-                    </li>
+                    {
+                        !!Object.keys(user).length && (
+                        <>
+                            <li className={classes.li} onClick={handleRequestShoes}>
+                                <Typography
+                                    className={classes.liContent}
+                                >Request Shoes</Typography>
+                                <FontAwesomeIcon 
+                                    className={classes.arrow}
+                                    icon={faChevronRight} 
+                                />
+                            </li>
+                            <li className={classes.li} onClick={handleShoeRequestStatus}>
+                                <Typography
+                                    className={classes.liContent}
+                                >Request Status</Typography>
+                                <FontAwesomeIcon 
+                                    className={classes.arrow}
+                                    icon={faChevronRight} 
+                                />
+                            </li>
+                        </>)
+                    }
                     <li className={classes.li} onClick={handleBookPage}>
                         <Typography
                             className={classes.liContent}
