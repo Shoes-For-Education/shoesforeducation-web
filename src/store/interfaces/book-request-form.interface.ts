@@ -1,4 +1,5 @@
 import type { EGender } from "../enums/gender.enum";
+import type { EOrderStatus } from "../enums/order-status.enum";
 import type { EProofType } from "../enums/proof-type.enum";
 
 export interface IBookRequestForm {
@@ -22,4 +23,9 @@ export interface IBookRequestForm {
     proofType: EProofType,
     shoeSize: string,
     bookId: string,
+    createdAt?: string,
+    status?: EOrderStatus,
+    aws?: {
+        key: string,
+    }
 }

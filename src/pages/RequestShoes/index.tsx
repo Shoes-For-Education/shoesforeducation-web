@@ -19,6 +19,7 @@ import { EGender } from "../../store/enums/gender.enum";
 import type { IBookRequestForm } from "../../store/interfaces/book-request-form.interface";
 import { setCreateBookForm, setFailedCreatingBookForm } from "../../store/actions/book-form.actions";
 import { useHistory } from "react-router";
+import Footer from "../../components/Footer";
 
 export interface IRequestShoesForm {
     email: string,
@@ -73,6 +74,24 @@ const RequestShoes = () => {
         shoeSize: user.shoeSize || '',
         age: user.age,
     });
+
+    useEffect(() => {
+        if (user) {
+            setValues((prevState) => ({
+                ...prevState,
+                email: user.email || "",
+                firstName: user.firstName || "",
+                lastName: user.lastName || "",
+                gender: user.gender || EGender.MALE,
+                age: user.age,
+                shoeSize: user.shoeSize || "",
+                address: {
+                    ...prevState.address,
+                    ...(user.address || {}),
+                }   
+            }));
+        }
+    }, [ user ]);
 
     const [ loading, setLoading ] = useState<boolean>(false);
     const isFailed = failedCreatingBookForm(state);
@@ -245,6 +264,7 @@ const RequestShoes = () => {
     const [uploadIntervalId, setUploadIntervalId] = useState<NodeJS.Timeout | null>(null)
 
     return (
+        <>
         <Navbar>
             <Page className={classes.container}>
                 <>
@@ -305,6 +325,8 @@ const RequestShoes = () => {
                 </>
             </Page>
         </Navbar>
+        <Footer />
+        </>
     )
 }
 

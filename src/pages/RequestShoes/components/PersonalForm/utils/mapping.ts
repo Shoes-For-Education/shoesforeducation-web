@@ -77,3 +77,12 @@ export const mappedFemaleSizes : { [ key in EFEMALE_SIZES ] : string } = {
     [ EFEMALE_SIZES["FEMALE_11.5"] ] : "Female 11.5",
     [ EFEMALE_SIZES.FEMALE_12 ] : "Female 12",
 }
+
+export type EShoeSizes = EFEMALE_SIZES & EFEMALE_UNISEX_SIZES & EMALE_SIZES & EMALE_UNISEX_SIZES;
+
+export const mappedShoeSizes : { [key in EShoeSizes] : string } = {
+    ...mappedMaleSizes,
+    ...mappedMaleUnisexSizes,
+    ...mappedFemaleSizes,
+    ...mappedFemaleUnisexSizes,
+};

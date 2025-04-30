@@ -2,7 +2,7 @@ import { makeStyles } from "tss-react/mui";
 export const useStyles = makeStyles()(theme => ({
     container: {
         display: 'flex',
-        justifyContent: "flex-end",
+        justifyContent: "flex-start",
         alignItems: 'center',
         padding: "25px",
         "@media(max-width: 950px)": {
@@ -10,14 +10,16 @@ export const useStyles = makeStyles()(theme => ({
         },
     },
     formContainer: {
-        width: 600,
-        minHeight: 465,
+        maxWidth: 850,
+        width: "100%",
+        height: "100%",
+        maxHeight: 600,
         borderRadius: 15,
         boxShadow: "0px 0px 3px 0px rgba(0, 0, 0, 0.1)",
         padding: "25px 15px",
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: "center",
         zIndex: 1,
         backgroundColor: "white",
     },
@@ -46,8 +48,8 @@ export const useStyles = makeStyles()(theme => ({
     bgImage: {
         position: 'absolute',
         zIndex: -1,
-        left: "50%",
-        transform: "translateX(-50%)",
+        right: 15,
+        width: "75%",
     },
     flex: {
         display: 'flex',
