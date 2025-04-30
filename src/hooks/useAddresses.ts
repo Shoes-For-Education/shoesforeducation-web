@@ -2,8 +2,17 @@ import { useCallback, useEffect, useState } from "react";
 import * as api from "../utils/api";
 import { getAddresses  } from "../constants/endpoints/google";
 
+export interface IAddressPredication {
+    description: string;
+    place_id: string;
+    terms: {
+        offset: number;
+        value: string;
+    }
+}
+
 export const useAddresses = ({ query } : { query:string }) => {
-    const [ addresses, setAddresses ] = useState<any[]>([]);
+    const [ addresses, setAddresses ] = useState<IAddressPredication[]>([]);
 
     const fetchAddresses = useCallback(async () => {
         if (!query) return; 

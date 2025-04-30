@@ -3,7 +3,7 @@ import Page from "../../components/Page";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createdBookForm, failedCreatingBookForm, getUser } from "../../store/selectors";
-import { IRootReducer } from "../../store/reducers";
+import type { IRootReducer } from "../../store/reducers";
 import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import { useBooks } from "../../hooks/useBooks";
 import BrandButton from "../../components/BrandButton";
@@ -16,8 +16,8 @@ import { RequestShoesFormSteps, requestShoesFormStepsMap } from "./enums/form-st
 import { setSnackbarEvent } from "../../store/actions/user.actions";
 import { EProofType } from "../../store/enums/proof-type.enum";
 import { EGender } from "../../store/enums/gender.enum";
-import { IBookRequestForm } from "../../store/interfaces/book-request-form.interface";
-import { setCreateBookForm, setCreatedBookForm, setFailedCreatingBookForm } from "../../store/actions/book-form.actions";
+import type { IBookRequestForm } from "../../store/interfaces/book-request-form.interface";
+import { setCreateBookForm, setFailedCreatingBookForm } from "../../store/actions/book-form.actions";
 import { useHistory } from "react-router";
 
 export interface IRequestShoesForm {
@@ -28,8 +28,16 @@ export interface IRequestShoesForm {
     firstName: string,
     lastName: string,
     gender: EGender,
-    addressQuery: string,
-    address: any,
+    address: {
+        absolute: string,
+        placeId?: string,
+        addressLine1?: string,
+        addressLine2?: string,
+        city?: string,
+        state?: string,
+        country?: string,
+        zipCode?: string,
+    },
     age?: number; 
     error: boolean,
     shoeSize: string,
@@ -51,9 +59,15 @@ const RequestShoes = () => {
         firstName: user?.firstName || "",
         lastName: user?.lastName || "",
         gender:  user?.gender || EGender.MALE,
-        addressQuery: user?.address?.absolute || "",
         address: {
             absolute: user?.address?.absolute || "",
+            addressLine1: user?.address?.addressLine1 || "",
+            addressLine2: user?.address?.addressLine2 || "",
+            country: user?.address?.country || "",
+            city: user?.address?.city || "",
+            placeId: user?.address?.placeId || "",
+            zipCode: user?.address?.zipCode || "",
+            state: user?.address?.state || "",
         },
         error: false,
         shoeSize: user.shoeSize || '',
@@ -69,17 +83,17 @@ const RequestShoes = () => {
             setLoading(false);
             dispatch(setFailedCreatingBookForm(false));
         }
-    }, [ isFailed ]);
+    }, [ isFailed, dispatch ]);
 
     const handleIsCreated = useCallback(() => {
         if (isCreated) {
             setLoading(false);
             history.push("/");
         };
-    }, [ isCreated ]);
+    }, [ isCreated, history ]);
 
-    useEffect(handleIsCreated, [ handleIsCreated ]);
-    useEffect(handleIsFailed, [ handleIsFailed ]);
+    useEffect(() => { handleIsCreated() }, [ handleIsCreated ]);
+    useEffect(() => { handleIsFailed() }, [ handleIsFailed ]);
 
     const [activeStep, setActiveStep] = useState<{
         index: number,
@@ -102,10 +116,12 @@ const RequestShoes = () => {
                 if (!values.bookId) {
                     handleEmptyFields();
                     return; 
-                } else if (values.proofType === EProofType.WRITTEN && !values.summary) {
+                }
+                if (values.proofType === EProofType.WRITTEN && !values.summary) {
                     handleEmptyFields();
                     return; 
-                } else if (values.proofType === EProofType.VIDEO && !values.videoFormData?.get('image')) {
+                }
+                if (values.proofType === EProofType.VIDEO && !values.videoFormData?.get('image')) {
                     handleEmptyFields();
                     return; 
                 };
@@ -129,10 +145,15 @@ const RequestShoes = () => {
         setActiveStep({ index: next, stage: Object.keys(requestShoesFormStepsMap)[next] });
     };
 
+    const constructAbsolute = (address:IRequestShoesForm['address']) => {
+        const { addressLine1, addressLine2, city, state, country, zipCode } = address;
+        return `${addressLine1}${addressLine2 ? `, ${addressLine2}` : ""}, ${city}, ${state}, ${country}, ${zipCode}`;
+    };
+
     const handleSubmit = () => {
         switch(activeStep.stage) {
             case RequestShoesFormSteps.SHIPPING: {
-                if (!Object.keys(values.address).length && !values.addressQuery) {
+                if (!values.address.addressLine1 && !values.address.placeId) {
                     handleEmptyFields();
                     return; 
                 }
@@ -153,7 +174,14 @@ const RequestShoes = () => {
             email: values.email,
             bookId: values.bookId,
             address: {
-                absolute: values?.address?.description || values?.addressQuery?.trim(),
+                absolute: constructAbsolute(values.address),
+                placeId: values.address.placeId,
+                addressLine1: values.address.addressLine1,
+                addressLine2: values.address.addressLine2,
+                city: values.address.city,
+                state: values.address.state,
+                country: values.address.country,
+                zipCode: values.address.zipCode,
             },
             summary: values.summary,
             proofType: values.proofType,
@@ -165,7 +193,7 @@ const RequestShoes = () => {
         const videos = values.videoFormData; 
 
         if (videos) {
-            for (let [ _, value ] of (videos.entries() as any)) {
+            for (const [ _, value ] of Array.from(videos.entries())) {
                 bookFormData.append('video', value);
             }
         };
@@ -179,9 +207,19 @@ const RequestShoes = () => {
     };
 
     const { classes } = useStyles();
-    const handleSetValues = (payload:any) => {
+    const handleSetValues = (payload:IRequestShoesForm) => {
         setValues(payload);
     }
+
+    const handleSetAddressDetails = useCallback((address:IRequestShoesForm['address']) => {
+        setValues((prevState) => ({
+            ...prevState,
+            address: {
+                ...prevState.address,
+                ...address,
+            }
+        }));
+    }, []);
 
     return (
         <Navbar>
@@ -202,7 +240,9 @@ const RequestShoes = () => {
                     <form>
                         { activeStep.stage === RequestShoesFormSteps.BOOK && <BookForm values={values} setValues={handleSetValues} books={books} /> }
                         { activeStep.stage === RequestShoesFormSteps.PERSONAL  && <PersonalForm values={values} setValues={handleSetValues} /> }
-                        { activeStep.stage === RequestShoesFormSteps.SHIPPING  && <ShippingForm values={values} setValues={handleSetValues} /> }
+                        { (activeStep.stage === RequestShoesFormSteps.SHIPPING) && 
+                            <ShippingForm values={values} setValues={setValues} setAddressDetails={handleSetAddressDetails} />
+                        }
                     </form>
                     <Box sx={{ display: 'flex', marginTop: 'auto', flexDirection: 'row', pt: 2 }}>
                         <BrandButton
