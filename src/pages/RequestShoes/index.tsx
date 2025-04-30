@@ -78,19 +78,29 @@ const RequestShoes = () => {
     const isFailed = failedCreatingBookForm(state);
     const isCreated = createdBookForm(state);
 
+    const finishProgressBar = useCallback(() => {
+        if (uploadIntervalId) {
+            clearInterval(uploadIntervalId);
+            setUploadIntervalId(null);
+          }
+        setUploadProgress(100);
+    }, []);
+
     const handleIsFailed = useCallback(() => {
         if (isFailed) {
+            finishProgressBar();
             setLoading(false);
             dispatch(setFailedCreatingBookForm(false));
         }
-    }, [ isFailed, dispatch ]);
+    }, [ isFailed, dispatch, finishProgressBar ]);
 
     const handleIsCreated = useCallback(() => {
         if (isCreated) {
+            finishProgressBar()
             setLoading(false);
             history.push("/");
         };
-    }, [ isCreated, history ]);
+    }, [ isCreated, history, finishProgressBar ]);
 
     useEffect(() => { handleIsCreated() }, [ handleIsCreated ]);
     useEffect(() => { handleIsFailed() }, [ handleIsFailed ]);
@@ -161,7 +171,17 @@ const RequestShoes = () => {
             }
         };
 
-        setLoading(!loading);
+        setLoading(true);
+
+        setUploadProgress(0);
+        const intervalId = setInterval(() => {
+            setUploadProgress((prev) => {
+                if (prev < 75) return prev + 1;         
+                if (prev < 95) return prev + 0.2;      
+                return prev;                             
+            });
+        }, 100); 
+        setUploadIntervalId(intervalId);
 
         const bookFormData = new FormData();
 
@@ -221,6 +241,9 @@ const RequestShoes = () => {
         }));
     }, []);
 
+    const [uploadProgress, setUploadProgress] = useState(0);
+    const [uploadIntervalId, setUploadIntervalId] = useState<NodeJS.Timeout | null>(null)
+
     return (
         <Navbar>
             <Page className={classes.container}>
@@ -259,6 +282,24 @@ const RequestShoes = () => {
                             onClick={activeStep.index !== Object.keys(requestShoesFormStepsMap).length - 1 ? handleNext : handleSubmit}>
                         </BrandButton>
                     </Box>
+                    {loading && uploadProgress > 0 && (
+                        <Box sx={{ width: '100%', mt: 2 }}>
+                        <Box sx={{ height: 10, backgroundColor: '#e0e0e0', borderRadius: 4 }}>
+                        <Box
+                            sx={{
+                            width: `${uploadProgress}%`,
+                            height: '100%',
+                            backgroundColor: "#3cb043",
+                            transition: 'width 0.2s ease-out',
+                            borderRadius: 4,
+                            }}
+                        />
+                        </Box>
+                        <Box sx={{ textAlign: 'right', fontSize: 12, mt: 0.5, color: "grey" }}>
+                            {Math.floor(uploadProgress)}%
+                        </Box>
+                    </Box>
+                    )}
                 </section>
                 <img className={classes.bgImage} src={PrizeSVG} alt="prize" />
                 </>
