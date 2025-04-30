@@ -92,10 +92,11 @@ const BookForm : React.FC<BookFormProps> = ({ books, values, setValues }) => {
                             Upload a breif video explaining what the book was about and what you learned.
                         </p>
                         <DropImage 
-                            image={values.videoFormData ? function () {
+                            maxSize={450}
+                            image={values.videoFormData ? (() => {
                                 const image:any = values.videoFormData?.get('image');
                                 return image;
-                            }() : null}
+                            })() : null}
                             accept={['video/*', 'video/quicktime']}
                             handleFileData={handleFileData}
                         />

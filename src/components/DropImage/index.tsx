@@ -5,21 +5,37 @@ import { Box } from '@mui/system';
 import clsx from 'clsx';
 import React, { ChangeEvent, useMemo, useState } from 'react';
 import { useStyles } from "./styles";
+import { setSnackbarEvent } from '../../store/actions/user.actions';
+import { useDispatch } from 'react-redux';
 
 type DropImageProps = {
     disabled?: boolean,
     handleFileData: (e:FormData) => void,
     image?: File | any
     accept?: string[],
+    maxSize?: number // in MB
 }
 
-const DropImage : React.FC<DropImageProps> = ({ disabled = false, handleFileData, image, accept = [] }) => {
+const DropImage : React.FC<DropImageProps> = ({ maxSize, disabled = false, handleFileData, image, accept = [] }) => {
     const { classes } = useStyles();
     const [ dragging, setDragging ] = useState(false);
+
+    const dispatch = useDispatch();
 
     const handleFileChange = (e:ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files; 
         if (!files || !files.length) return; 
+
+        if (maxSize) {
+            const sizeInMB = files[0].size / (1024 * 1024);
+
+            if (sizeInMB > maxSize) {
+                setDragging(false);
+                dispatch(setSnackbarEvent({ content: `Max file size is ${maxSize} MB`, variant: "error" }));
+                return;
+            }
+        }
+
         const images = new FormData();
         images.append('image', files[0]);
         handleFileData(images);
