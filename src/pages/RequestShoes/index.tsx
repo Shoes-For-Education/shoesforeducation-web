@@ -11,12 +11,13 @@ import PrizeSVG from "../../assets/prize.svg";
 import { useStyles } from "./styles";
 import BookForm from "./components/BookForm";
 import PersonalForm from "./components/PersonalForm";
+import NominationForm from "./components/NominationForm";
 import ShippingForm from "./components/ShippingForm";
 import { RequestShoesFormSteps, requestShoesFormStepsMap } from "./enums/form-steps.enum";
 import { setSnackbarEvent } from "../../store/actions/user.actions";
 import { EProofType } from "../../store/enums/proof-type.enum";
 import { EGender } from "../../store/enums/gender.enum";
-import type { IBookRequestForm } from "../../store/interfaces/book-request-form.interface";
+import type { IBookRequestForm, INominee } from "../../store/interfaces/book-request-form.interface";
 import { setCreateBookForm, setFailedCreatingBookForm } from "../../store/actions/book-form.actions";
 import { useHistory } from "react-router";
 import Footer from "../../components/Footer";
@@ -39,10 +40,11 @@ export interface IRequestShoesForm {
         country?: string,
         zipCode?: string,
     },
-    age?: number; 
+    age?: number;
     error: boolean,
     shoeSize: string,
     videoFormData: FormData | null,
+    nominees: INominee[],
 }
 
 const RequestShoes = () => {
@@ -73,6 +75,7 @@ const RequestShoes = () => {
         error: false,
         shoeSize: user.shoeSize || '',
         age: user.age,
+        nominees: [{ firstName: '', lastName: '', email: '' }],
     });
 
     useEffect(() => {
@@ -138,39 +141,59 @@ const RequestShoes = () => {
         }));
     };
 
-    const handleNext = () => {    
+    const handleNext = () => {
 
         switch(activeStep.stage) {
             case RequestShoesFormSteps.BOOK: {
                 if (!values.bookId) {
                     handleEmptyFields();
-                    return; 
+                    return;
                 }
                 if (values.proofType === EProofType.WRITTEN && !values.summary) {
                     handleEmptyFields();
-                    return; 
+                    return;
                 }
                 if (values.proofType === EProofType.VIDEO && !values.videoFormData?.get('image')) {
                     handleEmptyFields();
-                    return; 
+                    return;
                 };
-                break; 
+                break;
             }
             case RequestShoesFormSteps.PERSONAL: {
-                if (!values.firstName || 
-                    !values.lastName || 
+                if (!values.firstName ||
+                    !values.lastName ||
                     !values.email ||
                     !values.gender ||
                     !values.age ||
                     !values.shoeSize ) {
                         handleEmptyFields();
-                        return; 
+                        return;
                     }
-                break; 
+                break;
+            }
+            case RequestShoesFormSteps.NOMINATION: {
+                if (values.nominees.length === 0) {
+                    dispatch(setSnackbarEvent({
+                        content: "Please add at least one nominee!",
+                        variant: "error",
+                    }));
+                    return;
+                }
+                const hasEmptyFields = values.nominees.some(nominee =>
+                    !nominee.firstName || !nominee.lastName || !nominee.email
+                );
+                if (hasEmptyFields) {
+                    dispatch(setSnackbarEvent({
+                        content: "Please fill out all nominee fields!",
+                        variant: "error",
+                    }));
+                    return;
+                }
+                break;
             }
         }
 
-        const next = activeStep.index + 1; 
+        const next = activeStep.index + 1;
         setActiveStep({ index: next, stage: Object.keys(requestShoesFormStepsMap)[next] });
     };
 
@@ -225,6 +248,7 @@ const RequestShoes = () => {
             summary: values.summary,
             proofType: values.proofType,
             shoeSize: values.shoeSize,
+            nominees: values.nominees,
         };
 
         bookFormData.append('fields', JSON.stringify(payload));
@@ -283,7 +307,8 @@ const RequestShoes = () => {
                     <form>
                         { activeStep.stage === RequestShoesFormSteps.BOOK && <BookForm values={values} setValues={handleSetValues} books={books} /> }
                         { activeStep.stage === RequestShoesFormSteps.PERSONAL  && <PersonalForm values={values} setValues={handleSetValues} /> }
-                        { (activeStep.stage === RequestShoesFormSteps.SHIPPING) && 
+                        { activeStep.stage === RequestShoesFormSteps.NOMINATION && <NominationForm values={values} setValues={handleSetValues} books={books} /> }
+                        { (activeStep.stage === RequestShoesFormSteps.SHIPPING) &&
                             <ShippingForm values={values} setValues={setValues} setAddressDetails={handleSetAddressDetails} />
                         }
                     </form>

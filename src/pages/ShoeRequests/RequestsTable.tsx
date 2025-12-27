@@ -16,6 +16,7 @@ import { genderMap } from '../../utils/mapping';
 import AddressView from "./components/AddressView";
 import SummaryModal from "./components/SummaryModal";
 import VideoModal from "./components/VideoModal";
+import NomineeModal from "./components/NomineeModal";
 import { useStyles } from "./styles";
 import { mappedShoeSizes } from "../RequestShoes/components/PersonalForm/utils/mapping";
 import { EOrderStatus } from '../../store/enums/order-status.enum';
@@ -83,9 +84,16 @@ const RequestsTable : React.FC<OrdersPageContentProps> = ({
             }
         },
         {
+            id: "nominees",
+            label: "Nominees",
+            format: (e) => {
+                return <NomineeModal bookForm={e} disabled={!e.nominees || e.nominees.length === 0} />
+            }
+        },
+        {
             id: "createdAt",
             label: "Created On",
-            format: (e) => { 
+            format: (e) => {
                 if (!e.createdAt) return "-";
                 return formatDate(e.createdAt)
             }
