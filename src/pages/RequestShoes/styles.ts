@@ -6,11 +6,13 @@ export const useStyles = makeStyles()(theme => ({
         alignItems: 'center',
         padding: "25px",
         "@media(max-width: 950px)": {
-            padding: 5,
+            padding: 15,
         },
+        overflow: "scroll",
     },
     formContainer: {
         maxWidth: 850,
+        minWidth: 500,
         width: "100%",
         height: "100%",
         maxHeight: 600,
